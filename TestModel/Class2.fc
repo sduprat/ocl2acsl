@@ -1,0 +1,6 @@
+module Class2 :
+	function test2 :
+	contract :
+/*@	assigns \nothing; 
+	ensures test2_post : \forall int it_c; (0 <= it_c <= CLASS2_CLASS1_SIZE-1) ==> \let c=self->class1[it_c];(\exists int i; 0 <= i <= CLASS1_PROP1_SIZE-1 && (c).prop1[i] == 0) ;
+*/

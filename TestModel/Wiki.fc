@@ -1,0 +1,8 @@
+module Wiki :
+	function wikiOperation :
+	contract :
+/*@	requires \valid(array+(0..size_array-1)) && size_array>=0;
+	requires wikiPre : n != 0 ;
+	assigns \nothing; 
+	ensures wikiPost : array[0] != 0 ;
+*/

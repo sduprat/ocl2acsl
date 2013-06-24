@@ -1,0 +1,7 @@
+module TestBoolean :
+	function booleans :
+	contract :
+/*@	requires bool_pre : b1 == \true || b1 == \false && b2 || !b2 ;
+	assigns \nothing; 
+	ensures bool_post : \result == b1 && b2 || \result == b1 || b2 || \result == b1 ^^ b2 ;
+*/

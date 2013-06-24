@@ -1,0 +1,23 @@
+module TestInteger :
+	function add :
+	contract :
+/*@	requires add_pre : a >= 0 && b > 0 ;
+	assigns \nothing; 
+	ensures add_post : \result == a + b && b == \result - a ;
+*/
+	function mult :
+	contract :
+/*@	assigns \nothing; 
+	ensures mult_post : \result == a * b && \result / a == b && a * b % a == 0 ;
+*/
+	function max :
+	contract :
+/*@	assigns \nothing; 
+	ensures max_post : \result == \max(a, b) ;
+*/
+	function zero :
+	contract :
+/*@	requires \valid(n);
+	assigns *n;
+	ensures zero_post : *n == 0 ;
+*/

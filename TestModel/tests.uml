@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_oNYbAKdzEeKp9u1szBgxpQ" name="tests">
+  <packageImport xmi:id="_oNYbAadzEeKp9u1szBgxpQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_spzkIMzwEeKoasi8diYS_g" name="TestInteger">
+    <ownedOperation xmi:id="_wFqnAMzwEeKoasi8diYS_g" name="add" precondition="_UaHQgMzxEeKoasi8diYS_g" postcondition="_EjZPcMzxEeKoasi8diYS_g">
+      <ownedRule xmi:id="_EjZPcMzxEeKoasi8diYS_g" name="add_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_EjZ2gMzxEeKoasi8diYS_g" name="" value="result = a +b and b = result -a"/>
+      </ownedRule>
+      <ownedRule xmi:id="_UaHQgMzxEeKoasi8diYS_g" name="add_pre">
+        <specification xmi:type="uml:LiteralString" xmi:id="_UaH3kMzxEeKoasi8diYS_g" name="" value="a >= 0 and b >0"/>
+      </ownedRule>
+      <ownedParameter xmi:id="_xJdmUMzwEeKoasi8diYS_g" name="a" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_xi2WsMzwEeKoasi8diYS_g" name="b" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_x4lWIMzwEeKoasi8diYS_g" isUnique="false" direction="return" effect="create">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6AobUMzwEeKoasi8diYS_g" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6An0QMzwEeKoasi8diYS_g" value="1"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_eeAXUMzxEeKoasi8diYS_g" name="mult" postcondition="_mbiOkMzxEeKoasi8diYS_g">
+      <ownedRule xmi:id="_mbiOkMzxEeKoasi8diYS_g" name="mult_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_mbiOkczxEeKoasi8diYS_g" name="" value="result = a*b and result.div(a) = b and (a*b).mod(a) = 0"/>
+      </ownedRule>
+      <ownedParameter xmi:id="_fw47gMzxEeKoasi8diYS_g" name="a" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_gKu-4MzxEeKoasi8diYS_g" name="b" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_gbGWIMzxEeKoasi8diYS_g" isUnique="false" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_HgL7QMzyEeKoasi8diYS_g" name="max" postcondition="_PnA4cMzyEeKoasi8diYS_g">
+      <ownedRule xmi:id="_PnA4cMzyEeKoasi8diYS_g" name="max_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_PnA4cczyEeKoasi8diYS_g" name="" value="result = a.max(b) "/>
+      </ownedRule>
+      <ownedParameter xmi:id="_ImIPoMzyEeKoasi8diYS_g" name="a" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_JCe0cMzyEeKoasi8diYS_g" name="b" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_JWsw8MzyEeKoasi8diYS_g" isUnique="false" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_vxSjYMz5EeKoasi8diYS_g" name="zero" postcondition="_0HmcUMz5EeKoasi8diYS_g">
+      <ownedRule xmi:id="_0HmcUMz5EeKoasi8diYS_g" name="zero_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_0HnDYMz5EeKoasi8diYS_g" name="" value="n = 0"/>
+      </ownedRule>
+      <ownedParameter xmi:id="_yH6cgMz5EeKoasi8diYS_g" name="n" isUnique="false" direction="inout" effect="update">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_OLL-MMzzEeKoasi8diYS_g" name="TestBoolean">
+    <ownedOperation xmi:id="_V9om0MzzEeKoasi8diYS_g" name="booleans" precondition="_4vfcMMzzEeKoasi8diYS_g" postcondition="_A6hj8Mz0EeKoasi8diYS_g">
+      <ownedRule xmi:id="_4vfcMMzzEeKoasi8diYS_g" name="bool_pre">
+        <specification xmi:type="uml:LiteralString" xmi:id="_4vfcMczzEeKoasi8diYS_g" name="" value="b1 = true or b1 = false and b2 or not(b2)"/>
+      </ownedRule>
+      <ownedRule xmi:id="_A6hj8Mz0EeKoasi8diYS_g" name="bool_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_A6hj8cz0EeKoasi8diYS_g" name="" value="(result = b1 and b2) or (result = b1 or b2) or (result = b1 xor b2) "/>
+      </ownedRule>
+      <ownedParameter xmi:id="_X3edUMzzEeKoasi8diYS_g" name="b1" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_YW9OoMzzEeKoasi8diYS_g" name="b2" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_Y7A98MzzEeKoasi8diYS_g" name="" isUnique="false" direction="return" effect="create">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_kdFdgMz0EeKoasi8diYS_g" name="TestArray">
+    <ownedOperation xmi:id="_vZ3UIMz0EeKoasi8diYS_g" name="equal" precondition="_xH2EoM0PEeKoasi8diYS_g" postcondition="_FQ__gMz1EeKoasi8diYS_g _T_E6QM21EeKdztKa44TOPg">
+      <ownedRule xmi:id="_FQ__gMz1EeKoasi8diYS_g" name="equal_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_FQ__gcz1EeKoasi8diYS_g" name="" value="(size_a = size_b and Sequence{0..size_a-1} -> forAll( i | a->at(i) = b->at(i))) implies result"/>
+      </ownedRule>
+      <ownedRule xmi:id="_xH2EoM0PEeKoasi8diYS_g" name="equal_pre">
+        <specification xmi:type="uml:LiteralString" xmi:id="_xH2rsM0PEeKoasi8diYS_g" name="" value="a &lt;> b and a->last()&lt;>0"/>
+      </ownedRule>
+      <ownedRule xmi:id="_T_E6QM21EeKdztKa44TOPg" name="equal_post2">
+        <specification xmi:type="uml:LiteralString" xmi:id="_T_FhUM21EeKdztKa44TOPg" name="" value="a -> includesAll(b) implies result and a -> excludesAll(b) implies not(result)"/>
+      </ownedRule>
+      <ownedParameter xmi:id="_xUlUYMz0EeKoasi8diYS_g" name="a" isOrdered="true" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_0fH9wMz0EeKoasi8diYS_g" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_0fHWsMz0EeKoasi8diYS_g"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_yRUpcMz0EeKoasi8diYS_g" name="size_a" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_yrpN8Mz0EeKoasi8diYS_g" name="b" isOrdered="true" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6v6mYMz0EeKoasi8diYS_g" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6v5_UMz0EeKoasi8diYS_g"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_zbHjEMz0EeKoasi8diYS_g" name="size_b" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_zy2toMz0EeKoasi8diYS_g" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_i6PqYMz3EeKoasi8diYS_g" name="replace0" precondition="_8oE7cM2wEeKdztKa44TOPg _rRLt0M3AEeKdztKa44TOPg" postcondition="_uHb7kMz3EeKoasi8diYS_g _GG_OUM9QEeKrTtzpQ8tdfw _g3n14NHaEeKIJuZqc6i_Ng">
+      <ownedRule xmi:id="_uHb7kMz3EeKoasi8diYS_g" name="replace0_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_uHb7kcz3EeKoasi8diYS_g" name="" value="a->first() = o and a->includes(o)"/>
+      </ownedRule>
+      <ownedRule xmi:id="_8oE7cM2wEeKdztKa44TOPg" name="replace0_pre">
+        <specification xmi:type="uml:LiteralString" xmi:id="_8oIl0M2wEeKdztKa44TOPg" name="" value="a -> notEmpty() and not(a -> isEmpty())"/>
+      </ownedRule>
+      <ownedRule xmi:id="_rRLt0M3AEeKdztKa44TOPg" name="replace0_pre2">
+        <specification xmi:type="uml:LiteralString" xmi:id="_rRMU4M3AEeKdztKa44TOPg" name="" value="a -> exists(x,y | x &lt;>0 and y&lt;>0)"/>
+      </ownedRule>
+      <ownedRule xmi:id="_GG_OUM9QEeKrTtzpQ8tdfw" name="replace_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_GHEG0M9QEeKrTtzpQ8tdfw" name="" value="a->size() &lt;> 0"/>
+      </ownedRule>
+      <ownedRule xmi:id="_g3n14NHaEeKIJuZqc6i_Ng" name="replace_post2">
+        <specification xmi:type="uml:LiteralString" xmi:id="_g3sHUNHaEeKIJuZqc6i_Ng" name="" value="a -> one( x | x=0)"/>
+      </ownedRule>
+      <ownedParameter xmi:id="_kcjKoMz3EeKoasi8diYS_g" name="a" isOrdered="true" isUnique="false" direction="inout" effect="update">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_n15sEMz3EeKoasi8diYS_g" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_n15FAMz3EeKoasi8diYS_g"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_kxMk8Mz3EeKoasi8diYS_g" name="size_a" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_lDXTAMz3EeKoasi8diYS_g" name="o" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_LQTvMMz4EeKoasi8diYS_g" name="zeros" postcondition="_Wiq0QMz4EeKoasi8diYS_g">
+      <ownedRule xmi:id="_Wiq0QMz4EeKoasi8diYS_g" name="zeros_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_WirbUMz4EeKoasi8diYS_g" name="" value="a -> forAll ( x | x = 0) and a -> excludes(1)"/>
+      </ownedRule>
+      <ownedParameter xmi:id="_OzPDYMz4EeKoasi8diYS_g" name="a" isOrdered="true" isUnique="false" direction="inout" effect="update">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_SLxFccz4EeKoasi8diYS_g" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_SLxFcMz4EeKoasi8diYS_g"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_W8sd4M6lEeKvmvB9LLH_gA" name="size_a" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_hNrTgMz6EeKoasi8diYS_g" name="TestDataType">
+    <ownedOperation xmi:id="_-D-wcMz6EeKoasi8diYS_g" name="id" postcondition="_FynQEMz7EeKoasi8diYS_g">
+      <ownedRule xmi:id="_FynQEMz7EeKoasi8diYS_g" name="id_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_FynQEcz7EeKoasi8diYS_g" name="" value="result = obj.id"/>
+      </ownedRule>
+      <ownedParameter xmi:id="_BsUJEMz7EeKoasi8diYS_g" name="obj" type="_kTYgMMz6EeKoasi8diYS_g" isUnique="false" effect="read"/>
+      <ownedParameter xmi:id="_D1WSIMz7EeKoasi8diYS_g" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_KxngsMz7EeKoasi8diYS_g" name="zeros" precondition="_n1sB8Mz9EeKoasi8diYS_g" postcondition="_cStY4Mz7EeKoasi8diYS_g _csixgNf5EeKlIdJnklw0eA">
+      <ownedRule xmi:id="_cStY4Mz7EeKoasi8diYS_g" name="zeros_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_cSt_8Mz7EeKoasi8diYS_g" name="" value="obj.array -> forAll(x | x=0) and obj.array -> excludes(1) and obj.array -> includes(0)"/>
+      </ownedRule>
+      <ownedRule xmi:id="_n1sB8Mz9EeKoasi8diYS_g" name="zeros_pre">
+        <specification xmi:type="uml:LiteralString" xmi:id="_n1sB8cz9EeKoasi8diYS_g" name="" value="let x : Integer = 0 in obj.array -> exists( y | y &lt;> x )"/>
+      </ownedRule>
+      <ownedRule xmi:id="_csixgNf5EeKlIdJnklw0eA" name="zeros_post2">
+        <specification xmi:type="uml:LiteralString" xmi:id="_csjYkNf5EeKlIdJnklw0eA" name="" value="obj.cstArray -> forAll(x | x=0)"/>
+      </ownedRule>
+      <ownedParameter xmi:id="_YXWWkMz7EeKoasi8diYS_g" name="obj" type="_kTYgMMz6EeKoasi8diYS_g" direction="inout" effect="update"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_NOUXMMz8EeKoasi8diYS_g" name="incId" postcondition="_RehoIMz8EeKoasi8diYS_g">
+      <ownedRule xmi:id="_RehoIMz8EeKoasi8diYS_g" name="inc_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_ReiPMMz8EeKoasi8diYS_g" name="" value="obj.id@pre = obj.id - 1 and if obj.id@pre = 0 then obj.id@pre = 1 else obj.id@pre &lt;>1 endif"/>
+      </ownedRule>
+      <ownedParameter xmi:id="_QJYaIMz8EeKoasi8diYS_g" name="obj" type="_kTYgMMz6EeKoasi8diYS_g" isUnique="false" direction="inout" effect="update"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_9Dv8UM0XEeKoasi8diYS_g" name="equal" postcondition="_IB0zcM0YEeKoasi8diYS_g _6tlrUM0ZEeKoasi8diYS_g">
+      <ownedRule xmi:id="_IB0zcM0YEeKoasi8diYS_g" name="equal_post1">
+        <specification xmi:type="uml:LiteralString" xmi:id="_IB0zcc0YEeKoasi8diYS_g" name="" value="(obj.array = a) implies result"/>
+      </ownedRule>
+      <ownedRule xmi:id="_6tlrUM0ZEeKoasi8diYS_g" name="equal_post2">
+        <specification xmi:type="uml:LiteralString" xmi:id="_6tmSYM0ZEeKoasi8diYS_g" name="" value="(a &lt;> obj.array) implies not(result)"/>
+      </ownedRule>
+      <ownedParameter xmi:id="__b9J0M0XEeKoasi8diYS_g" name="obj" type="_kTYgMMz6EeKoasi8diYS_g" isUnique="false" effect="read"/>
+      <ownedParameter xmi:id="__rHnMM0XEeKoasi8diYS_g" name="a" isOrdered="true" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_DQ6CIM0YEeKoasi8diYS_g" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_DQ5bEM0YEeKoasi8diYS_g"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_GnrJoM0YEeKoasi8diYS_g" name="size_a" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_MCKcYM0YEeKoasi8diYS_g" isUnique="false" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_xlpYsM3EEeKyH7gI8x7L8w" name="TestReal">
+    <ownedOperation xmi:id="_0NlEQM3EEeKyH7gI8x7L8w" name="add" postcondition="__iixYM3EEeKyH7gI8x7L8w">
+      <ownedRule xmi:id="__iixYM3EEeKyH7gI8x7L8w" name="add_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="__ijYcM3EEeKyH7gI8x7L8w" name="" value="result=a+b and a = result-b"/>
+      </ownedRule>
+      <ownedParameter xmi:id="_0_Y7sM3EEeKyH7gI8x7L8w" name="a" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" effect="read"/>
+      <ownedParameter xmi:id="_1Lp2EM3EEeKyH7gI8x7L8w" name="b" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" effect="read"/>
+      <ownedParameter xmi:id="_1aEskM3EEeKyH7gI8x7L8w" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_wq2OQM3NEeKyH7gI8x7L8w" name="mult" postcondition="_5bin0M3NEeKyH7gI8x7L8w">
+      <ownedRule xmi:id="_5bin0M3NEeKyH7gI8x7L8w" name="mult_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_5bjO4M3NEeKyH7gI8x7L8w" name="" value="result = a*b and a = result/b "/>
+      </ownedRule>
+      <ownedParameter xmi:id="_yCjoEM3NEeKyH7gI8x7L8w" name="a" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" effect="read"/>
+      <ownedParameter xmi:id="_yfusQM3NEeKyH7gI8x7L8w" name="b" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" effect="read"/>
+      <ownedParameter xmi:id="_y88MsM3NEeKyH7gI8x7L8w" name="" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_OJ00wM3OEeKyH7gI8x7L8w" name="max" postcondition="_USNIQM3OEeKyH7gI8x7L8w">
+      <ownedRule xmi:id="_USNIQM3OEeKyH7gI8x7L8w" name="max_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_USNIQc3OEeKyH7gI8x7L8w" name="" value="result = a.max(b) and result >= a and result >= b"/>
+      </ownedRule>
+      <ownedParameter xmi:id="_PdO9YM3OEeKyH7gI8x7L8w" name="a" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" effect="read"/>
+      <ownedParameter xmi:id="_P1eeQM3OEeKyH7gI8x7L8w" name="b" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" effect="read"/>
+      <ownedParameter xmi:id="_QJ3Z4M3OEeKyH7gI8x7L8w" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_rTWvsM3OEeKyH7gI8x7L8w" name="zero" postcondition="_u1jrIM3OEeKyH7gI8x7L8w">
+      <ownedRule xmi:id="_u1jrIM3OEeKyH7gI8x7L8w" name="zero_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_u1kSMM3OEeKyH7gI8x7L8w" name="" value="a.abs() = 0"/>
+      </ownedRule>
+      <ownedParameter xmi:id="_tiGfMM3OEeKyH7gI8x7L8w" name="a" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" direction="inout" effect="update"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_hVvsgM3NEeKyH7gI8x7L8w" name="Real"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_v-DKoNGnEeKHFZ-3I-xkiw" name="Wiki">
+    <ownedOperation xmi:id="_zIS5ENGnEeKHFZ-3I-xkiw" name="wikiOperation" precondition="_DYLBANGoEeKHFZ-3I-xkiw" postcondition="_H0ai0NGoEeKHFZ-3I-xkiw">
+      <ownedRule xmi:id="_DYLBANGoEeKHFZ-3I-xkiw" name="wikiPre">
+        <specification xmi:type="uml:LiteralString" xmi:id="_DYLoENGoEeKHFZ-3I-xkiw" name="" value="n &lt;> 0"/>
+      </ownedRule>
+      <ownedRule xmi:id="_H0ai0NGoEeKHFZ-3I-xkiw" name="wikiPost">
+        <specification xmi:type="uml:LiteralString" xmi:id="_H0bJ4NGoEeKHFZ-3I-xkiw" name="" value="array -> first() &lt;> 0 "/>
+      </ownedRule>
+      <ownedParameter xmi:id="_6vAy0NGnEeKHFZ-3I-xkiw" name="n" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="__EMqYNGnEeKHFZ-3I-xkiw" name="array" isOrdered="true" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hXVuANGpEeKHFZ-3I-xkiw" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hXVG8NGpEeKHFZ-3I-xkiw"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_xQ19UNGpEeKHFZ-3I-xkiw" name="size_array" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_dr86ANGsEeKHFZ-3I-xkiw" name="TestCstArray">
+    <ownedOperation xmi:id="_BVN4gNGtEeKHFZ-3I-xkiw" name="equal" postcondition="_LKXYsNGtEeKHFZ-3I-xkiw">
+      <ownedRule xmi:id="_LKXYsNGtEeKHFZ-3I-xkiw" name="equal_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_LKXYsdGtEeKHFZ-3I-xkiw" name="" value="result implies a -> includes(b->first()) "/>
+      </ownedRule>
+      <ownedParameter xmi:id="_EEC2QNGtEeKHFZ-3I-xkiw" name="a" isOrdered="true" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ID7MMNGtEeKHFZ-3I-xkiw" value="5"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HtawsNGtEeKHFZ-3I-xkiw" value="5"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_FdrisNGtEeKHFZ-3I-xkiw" name="b" isOrdered="true" isUnique="false" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JCLkMNGtEeKHFZ-3I-xkiw" value="5"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_J2v0sNGtEeKHFZ-3I-xkiw" value="5"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_QnZCENGtEeKHFZ-3I-xkiw" isUnique="false" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_u6nwANGtEeKHFZ-3I-xkiw" name="zeros" postcondition="_4vsXsNGtEeKHFZ-3I-xkiw">
+      <ownedRule xmi:id="_4vsXsNGtEeKHFZ-3I-xkiw" name="zeros_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_4vs-wNGtEeKHFZ-3I-xkiw" name="" value="a -> forAll( x | x=0)"/>
+      </ownedRule>
+      <ownedParameter xmi:id="_ynviANGtEeKHFZ-3I-xkiw" name="a" isOrdered="true" isUnique="false" direction="inout" effect="update">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_003g4NGtEeKHFZ-3I-xkiw" value="7"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_0HCKgNGtEeKHFZ-3I-xkiw" value="7"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_kTYgMMz6EeKoasi8diYS_g" name="Type1">
+    <ownedAttribute xmi:id="_xgVpsMz6EeKoasi8diYS_g" name="id" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_3eqpUMz6EeKoasi8diYS_g" name="array" isOrdered="true" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_52us4cz6EeKoasi8diYS_g" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_52us4Mz6EeKoasi8diYS_g"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_N5kwIMz7EeKoasi8diYS_g" name="size_array" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_P3kqMNf5EeKlIdJnklw0eA" name="cstArray" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Wkvs0Nf5EeKlIdJnklw0eA" value="5"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WMmSkNf5EeKlIdJnklw0eA" value="5"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_KxVNoNQeEeKWB5uGPyfeWw" name="DataType1">
+    <ownedAttribute xmi:id="_M4fHYNQeEeKWB5uGPyfeWw" name="id" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_LDf7sNQeEeKWB5uGPyfeWw" name="DataType2">
+    <ownedAttribute xmi:id="_3jTAkNQfEeKWB5uGPyfeWw" name="size_c" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_3zsNANQfEeKWB5uGPyfeWw" name="size_a" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_MMiEcNdMEeKXXKS6pFKAUA" name="op"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_QoToENQeEeKWB5uGPyfeWw" name="comp1" memberEnd="_QoToFNQeEeKWB5uGPyfeWw _QoToEdQeEeKWB5uGPyfeWw" navigableOwnedEnd="_QoToEdQeEeKWB5uGPyfeWw">
+    <ownedEnd xmi:id="_QoToEdQeEeKWB5uGPyfeWw" name="c1" type="_KxVNoNQeEeKWB5uGPyfeWw" aggregation="composite" association="_QoToENQeEeKWB5uGPyfeWw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QoToEtQeEeKWB5uGPyfeWw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QoToE9QeEeKWB5uGPyfeWw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_QoToFNQeEeKWB5uGPyfeWw" name="" type="_LDf7sNQeEeKWB5uGPyfeWw" association="_QoToENQeEeKWB5uGPyfeWw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QoToFdQeEeKWB5uGPyfeWw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QoToFtQeEeKWB5uGPyfeWw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_c2PkkNQeEeKWB5uGPyfeWw" name="compN" memberEnd="_c2PklNQeEeKWB5uGPyfeWw _c2PkkdQeEeKWB5uGPyfeWw" navigableOwnedEnd="_c2PkkdQeEeKWB5uGPyfeWw">
+    <ownedEnd xmi:id="_c2PkkdQeEeKWB5uGPyfeWw" name="cN" type="_KxVNoNQeEeKWB5uGPyfeWw" aggregation="composite" association="_c2PkkNQeEeKWB5uGPyfeWw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_c2PkktQeEeKWB5uGPyfeWw" value="5"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_c2Pkk9QeEeKWB5uGPyfeWw" value="5"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_c2PklNQeEeKWB5uGPyfeWw" name="" type="_LDf7sNQeEeKWB5uGPyfeWw" association="_c2PkkNQeEeKWB5uGPyfeWw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_c2PkldQeEeKWB5uGPyfeWw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_c2PkltQeEeKWB5uGPyfeWw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_pdEiMNQeEeKWB5uGPyfeWw" name="comp" memberEnd="_pdEiNNQeEeKWB5uGPyfeWw _pdEiMdQeEeKWB5uGPyfeWw" navigableOwnedEnd="_pdEiMdQeEeKWB5uGPyfeWw">
+    <ownedEnd xmi:id="_pdEiMdQeEeKWB5uGPyfeWw" name="c" type="_KxVNoNQeEeKWB5uGPyfeWw" aggregation="composite" association="_pdEiMNQeEeKWB5uGPyfeWw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pdEiMtQeEeKWB5uGPyfeWw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pdEiM9QeEeKWB5uGPyfeWw"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_pdEiNNQeEeKWB5uGPyfeWw" name="" type="_LDf7sNQeEeKWB5uGPyfeWw" association="_pdEiMNQeEeKWB5uGPyfeWw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pdEiNdQeEeKWB5uGPyfeWw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pdEiNtQeEeKWB5uGPyfeWw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_132A0NQeEeKWB5uGPyfeWw" name="agg1" memberEnd="_132n49QeEeKWB5uGPyfeWw _132n4NQeEeKWB5uGPyfeWw" navigableOwnedEnd="_132n4NQeEeKWB5uGPyfeWw">
+    <ownedEnd xmi:id="_132n4NQeEeKWB5uGPyfeWw" name="a1" type="_KxVNoNQeEeKWB5uGPyfeWw" aggregation="shared" association="_132A0NQeEeKWB5uGPyfeWw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_132n4dQeEeKWB5uGPyfeWw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_132n4tQeEeKWB5uGPyfeWw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_132n49QeEeKWB5uGPyfeWw" name="" type="_LDf7sNQeEeKWB5uGPyfeWw" association="_132A0NQeEeKWB5uGPyfeWw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_132n5NQeEeKWB5uGPyfeWw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_132n5dQeEeKWB5uGPyfeWw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_2RpA4NQeEeKWB5uGPyfeWw" name="agg" memberEnd="_2RpA5NQeEeKWB5uGPyfeWw _2RpA4dQeEeKWB5uGPyfeWw" navigableOwnedEnd="_2RpA4dQeEeKWB5uGPyfeWw">
+    <ownedEnd xmi:id="_2RpA4dQeEeKWB5uGPyfeWw" name="a" type="_KxVNoNQeEeKWB5uGPyfeWw" aggregation="shared" association="_2RpA4NQeEeKWB5uGPyfeWw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2RpA4tQeEeKWB5uGPyfeWw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2RpA49QeEeKWB5uGPyfeWw"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_2RpA5NQeEeKWB5uGPyfeWw" name="" type="_LDf7sNQeEeKWB5uGPyfeWw" association="_2RpA4NQeEeKWB5uGPyfeWw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2RpA5dQeEeKWB5uGPyfeWw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2RpA5tQeEeKWB5uGPyfeWw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_2tCjcNQeEeKWB5uGPyfeWw" name="aggN" memberEnd="_2tCjdNQeEeKWB5uGPyfeWw _2tCjcdQeEeKWB5uGPyfeWw" navigableOwnedEnd="_2tCjcdQeEeKWB5uGPyfeWw">
+    <ownedEnd xmi:id="_2tCjcdQeEeKWB5uGPyfeWw" name="aN" type="_KxVNoNQeEeKWB5uGPyfeWw" aggregation="shared" association="_2tCjcNQeEeKWB5uGPyfeWw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2tCjctQeEeKWB5uGPyfeWw" value="9"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2tCjc9QeEeKWB5uGPyfeWw" value="9"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_2tCjdNQeEeKWB5uGPyfeWw" name="" type="_LDf7sNQeEeKWB5uGPyfeWw" association="_2tCjcNQeEeKWB5uGPyfeWw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2tCjddQeEeKWB5uGPyfeWw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2tCjdtQeEeKWB5uGPyfeWw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_OT7VMNQfEeKWB5uGPyfeWw" name="TestAssociation">
+    <ownedOperation xmi:id="_RDiWENQfEeKWB5uGPyfeWw" name="test" postcondition="_VmC38NQfEeKWB5uGPyfeWw">
+      <ownedRule xmi:id="_VmC38NQfEeKWB5uGPyfeWw" name="test_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_VmEGENQfEeKWB5uGPyfeWw" name="" value="obj.c1.id = 0 and obj.cN -> forAll(x | x.id=0) and obj.c -> forAll(x | x.id=0) and obj.a1.id=0 and obj.aN -> forAll( x | x.id=0) and obj.a -> forAll(x | x.id=0)"/>
+      </ownedRule>
+      <ownedParameter xmi:id="_UsJbgNQfEeKWB5uGPyfeWw" name="obj" type="_LDf7sNQeEeKWB5uGPyfeWw" isUnique="false" direction="inout" effect="update"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_DD_T4NgCEeKlIdJnklw0eA" name="Class1">
+    <ownedAttribute xmi:id="_M2UJkNgCEeKlIdJnklw0eA" name="prop1" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YmDHINgCEeKlIdJnklw0eA" value="5"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YRUNQNgCEeKlIdJnklw0eA" value="5"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_SV-3QNgCEeKlIdJnklw0eA" name="test" postcondition="_aK_EoNgCEeKlIdJnklw0eA">
+      <ownedRule xmi:id="_aK_EoNgCEeKlIdJnklw0eA" name="test_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_aK_rsNgCEeKlIdJnklw0eA" name="" value="prop1 -> forAll(x | x=0)"/>
+      </ownedRule>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Dv5XoNgCEeKlIdJnklw0eA" name="Class2">
+    <ownedOperation xmi:id="_FZL0MNgDEeKlIdJnklw0eA" name="test2" postcondition="_GvdqoNgDEeKlIdJnklw0eA">
+      <ownedRule xmi:id="_GvdqoNgDEeKlIdJnklw0eA" name="test2_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_GveRsNgDEeKlIdJnklw0eA" name="" value="class1 -> forAll( c | c.prop1 ->includes(0) )"/>
+      </ownedRule>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_n_tYw9gCEeKlIdJnklw0eA" name="association" memberEnd="_n_tYxNgCEeKlIdJnklw0eA _n_tYwNgCEeKlIdJnklw0eA" navigableOwnedEnd="_n_tYxNgCEeKlIdJnklw0eA">
+    <ownedEnd xmi:id="_n_tYxNgCEeKlIdJnklw0eA" name="class1" type="_DD_T4NgCEeKlIdJnklw0eA" aggregation="composite" association="_n_tYw9gCEeKlIdJnklw0eA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_n_tYxdgCEeKlIdJnklw0eA" value="9"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_n_tYxtgCEeKlIdJnklw0eA" value="9"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_n_tYwNgCEeKlIdJnklw0eA" name="" type="_Dv5XoNgCEeKlIdJnklw0eA" association="_n_tYw9gCEeKlIdJnklw0eA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_n_tYwdgCEeKlIdJnklw0eA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_n_tYwtgCEeKlIdJnklw0eA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>
