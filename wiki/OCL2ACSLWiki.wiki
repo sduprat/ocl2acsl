@@ -28,23 +28,12 @@ Ocl2acsl methods require constraints defined in the context of a class diagram. 
 
 *Wrapper*: A wrapper “wrapper.mtl” is provided to invoke the java methods for translation. For example, the prepost2acsl method is wrapped into an ACCELEO query as follows:
 
-<code language="java">[query public prepost2acsl(arg0 : Constraint) : String
-	= invoke('OCL2ACSL.StaticOcl2Acsl', 'prepost2acsl(org.eclipse.uml2.uml.Constraint)', Sequence{arg0}) /]</code>
+<img src="https://svn.codespot.com/a/eclipselabs.org/ocl2acsl/wiki/wrapper.png" height="100" width="500"/>
+
  
 *Generator*: The “generate.mtl” file parses the model and generates for each class a “.fc” file containing the different contracts.
 
-<code>[template public generatePropertyFile(aClass : Class)]
-[comment @main/]
-[file (aClass.name.concat('.fc'), false, 'UTF-8')]
-module [aClass.name/] :
-[for (oper : Operation | aClass.ownedOperation)]
-	function [oper.name/] :
-	contract :
-/*@[oper.getValidClauses()/][oper.getPre()/][oper.getAssignsClauses()/][oper.getPost()/]*/
-[/for]
-[/file]
-[/template]
-</code>
+<img src="https://svn.codespot.com/a/eclipselabs.org/ocl2acsl/wiki/generator.PNG" height="200" width="500"/>
 
 A contract contains four different parts:
   * Valid clauses: They express which pointers are required to be valid before the execution of the method,  and are generated using getValidClauses( )
@@ -57,13 +46,18 @@ A contract contains four different parts:
 
 These three templates invoke the wrapper’s queries and add the corresponding ACSL keywords to the result. Below is how getPre() works :
 
-<code>[template public getPre(op : Operation)]
-
-[for (preCond : Constraint | op.precondition)]
-requires [preCond.name/] : [preCond.prepost2acsl()/] ;[/for]
-[/template]
-</code>
+<img src="https://svn.codespot.com/a/eclipselabs.org/ocl2acsl/wiki/getpre.PNG" height="100" width="500"/>
 
 = An example =
 
+Let’s consider the following class diagram: 
 
+<img src="https://svn.codespot.com/a/eclipselabs.org/ocl2acsl/wiki/wiki.png"/>
+
+We run the ACCELO module by running the project as an ACCELEO application and by providing the path to the model and the destination of the generated files. 
+
+<img src="https://svn.codespot.com/a/eclipselabs.org/ocl2acsl/wiki/acceleo.png" height="500" width="600"/>
+
+The tool generates the corresponding Wiki.fc file:
+
+<img src="https://svn.codespot.com/a/eclipselabs.org/ocl2acsl/wiki/fc.png"/>
