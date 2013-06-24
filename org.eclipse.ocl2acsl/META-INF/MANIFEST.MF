@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ocl2acsl
+Bundle-SymbolicName: org.eclipse.ocl2acsl;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.ocl2acsl.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.uml2.uml;visibility:=reexport,
+ org.eclipse.ocl;visibility:=reexport,
+ org.eclipse.ocl.uml;visibility:=reexport,
+ org.eclipse.ocl.ecore;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.eclipse.ocl2acsl,
+ org.eclipse.ocl2acsl.additionalOperations
+Import-Package: org.eclipse.ocl.ecore.internal
