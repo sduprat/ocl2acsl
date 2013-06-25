@@ -61,3 +61,46 @@ We run the ACCELO module by running the project as an ACCELEO application and by
 The tool generates the corresponding Wiki.fc file:
 
 <img src="https://svn.codespot.com/a/eclipselabs.org/ocl2acsl/wiki/fc.png"/>
+
+= Rules and assumptions for translation =
+
+|| *OCL expression* || *Details* || *Remarks and assumptions* || *Implementation* ||
+|| PropertyCallExp || Attribute access || Assumption: A property of type T is translated to a field of type T. A collection property is translated <br> to a pointer field T`*` if it has a variable size, to an array T`[`n`]` otherwise.  If the size is variable, the struct <br> must also own a property of type int named size_{name_array} indicating the size of the array. <br> If it is constant, it must be defined using a macro named CLASS_PROP_SIZE ||<code>(*obj).id / (*obj).array[i]</code>||
+|| || Composition || Assumption : Same assumption || <code>(*obj1).obj2.id / (*obj1).objArray`[`i].id </code>||
+|| || Aggregation || Assumption: An aggregation of type T is translated to a pointer field of type T`*`. If it has a multiplicity of n, <br> it is translated to an array of pointers of size n. Otherwise, if it has a variable size it is translated to a <br> pointer on pointers.  Same assumptions for the sizes. || <code>(*(*obj1).obj2).id / (*(*obj1).objArray[i]).id </code> ||
+|| || PRE label	|| || <code>\old </code> ||
+|| OperationCallExp || or / xor/ and/ not/ implies || On booleans || <code>`|``|` / ^^ / && / ! /  ==> </code>||
+|| || +/- || On integers/reals ||<code>+/-</code>||
+|| || *// || On integers/reals || <code>*//</code>||
+|| || < > <= >= || On integers/reals ||<code>< > <= >= </code>||
+|| || Min/Max || On integers/reals ||<code>\Min \Max</code>||
+|| || Mod || On integers ||<code>%</code>||
+|| || abs || On reals ||<code>Abs</code>||
+|| || a->First()/last || ||<code>a[0] a[size-1]</code>||
+|| || a->at(i)|| ||<code>a[i]</code>||
+|| || Includes(e) || The source of the operator must be one of the following: || ||	
+|| || || 1- An array that is a parameter of the operation ||<code>\exists int i;  0 <= i <= size_a-1 && a[i]=e</code>||
+|| || || 2- A property that is an array ||<code>\exists int i;  0 <= i <= obj.size_prop-1 && obj.prop[i]=e</code>||
+|| || || If the array is of variable size, the operation or the owning type must have a parameter or a field <br> indicating the size and named size_{name_array}. Is the size is constant, it must be defined <br> using a macro named OPER_PARAM_SIZE || ||	 
+|| || Excludes(obj) || Idem (a is either a parameter or a property) ||<code>\forall int i;  0 <= i <= size_a-1 ==> a[i]!=e</code>||
+|| || <> on collections a,b || Idem (a,b are either parameters or properties) || <code>size_a!=size_b </code><code>`|``|` \exists int i;  0 <= i <= size_a-1 && a[i]!=b[i]</code>||
+|| || "=" on collections a,b || Idem (a,b are either parameters or properties) || <code>size_a==size_b</code><code>&& \forall int i;  0 <= i <= size_a-1 ==> a[i]=b[i]</code>||
+|| || IncludesAll a,b || Idem (a,b are either parameters or properties) || <code>\forall int i;  0 <= i <= size_b-1</code><code>==> \exists int j;  0 <= j <= size_a-1 && a[j]=b[i]</code>||
+|| || ExcludesAll a,b || Idem (a,b are either parameters or properties)	||<code>\forall int i;  0 <= i <= size_b-1</code><code>==> \forall int j;  0 <= j <= size_a-1 ==> a[j]!=b[i]</code>||
+|| || isEmpty || Idem (a is either a parameter or a property) || <code>size_a = 0</code>||
+|| || notEmpty || Idem (a is either a parameter or a property) || <code>size_a != 0</code>||
+|| || size || Idem (a is either a parameter or a property) || <code>size_a</code>||
+|| IteratorExp || Forall || The source of the operator must be one of the following: || ||	 
+|| || || 1- A sequence of integers n1..n2 that indexes an array in the body of the forAll || <code>\forall int i; n1 <= i <= n2 ==> body(a[i]);</code>||
+|| || || 2- An array that is a parameter of the operation || <code>\forall int i; 0 <= i <= size_a-1 ==> body(a[i]);</code>||
+|| || || 3- A property that is an array || <code>\forall int i; 0 <= i <= obj.size_prop-1 ==> body(obj.prop[i]);</code>||
+|| || || If the array is of variable size, the operation or the owning type must have a parameter or a field <br> indicating the size and named size_{name_array}. Is the size is constant, it must be defined using a macro. || ||	 
+|| || Exists || Idem || Idem with \exists ||
+|| || One || The source of the operator must be one of the following: || ||	 
+|| || || 1- An array that is a parameter of the operation || <code>(\exists int i; 0<=i<=size_a-1 && f(a[i]))</code><code> && (\forall int j; 0<=j<=size_a-1 && j!=i ==> !f(a[i])</code>||
+|| || || 2- A property that is an array ||<code>(\exists int i; 0<=i<=obj.size_prop-1 && f(obj.prop[i]))</code><code>&& (\forall int j; 0<=j<=obj.size_prop-1 && j!=i ==> !f(obj.prop[i])</code> ||
+|| || || Same assumptions for the sizes || ||	 
+|| VariableExp || Parameter || Assumption: All parameters of primitive types and that are OUT or INOUT, are transformed into <br> pointers. Parameters of user-defined types are always transformed into pointers. || Generation of assigns clauses for modifiable parameters and valid clauses <br> for pointers and arrays. ||
+|| || Result || ||<code>\result</code>|| 
+|| IfExp || || ||<code>condition?x:y</code>||
+|| LetExp || || ||<code>\let id=exp;body;</code>||
