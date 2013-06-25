@@ -13,4 +13,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.ocl2acsl,
  org.eclipse.ocl2acsl.additionalOperations
-Import-Package: org.eclipse.ocl.ecore.internal
+Import-Package: org.eclipse.emf.compare.util,
+ org.eclipse.ocl.ecore.internal

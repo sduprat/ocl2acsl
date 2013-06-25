@@ -1,18 +1,14 @@
-/*****************************************************************************
- * Copyright (c) 2013 Atos.
- *
- *    
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- *
- *****************************************************************************/
-
 package org.eclipse.ocl2acsl;
 
+/**
+ * Exception thrown by the OCL parser if it fails to parse the OCL expression
+ * 
+ * @author A560169
+ * 
+ */
 public class OCL2acslParserException extends Exception {
+
+	private static final long serialVersionUID = 1L;
 	private final Exception e;
 
 	public OCL2acslParserException(Exception e) {
@@ -28,8 +24,5 @@ public class OCL2acslParserException extends Exception {
 	public String getLocalizedMessage() {
 		return e.getLocalizedMessage();
 	}
-	
-	
-	
-	
+
 }
