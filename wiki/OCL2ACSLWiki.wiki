@@ -54,7 +54,7 @@ Let’s consider the following class diagram:
 
 <img src="https://svn.codespot.com/a/eclipselabs.org/ocl2acsl/wiki/wiki.png"/>
 
-We run the ACCELO module by running the project as an ACCELEO application and by providing the path to the model and the destination of the generated files. 
+We run the ACCELEO module by running the project as an ACCELEO application and by providing the path to the model and the destination of the generated files. 
 
 <img src="https://svn.codespot.com/a/eclipselabs.org/ocl2acsl/wiki/acceleo.png" height="500" width="600"/>
 
