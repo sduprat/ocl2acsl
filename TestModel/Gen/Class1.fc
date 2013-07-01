@@ -1,6 +1,7 @@
 module Class1 :
 	function test :
 	contract :
-/*@	assigns \nothing; 
+/*@	requires \valid(self);
+	assigns *self;
 	ensures test_post : \forall int it_x; (0 <= it_x <= CLASS1_PROP1_SIZE-1) ==> \let x=self->prop1[it_x];(x == 0) ;
 */

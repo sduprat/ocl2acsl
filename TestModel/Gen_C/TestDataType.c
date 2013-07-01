@@ -39,8 +39,8 @@ void incId(Type1* obj){
 /*@	requires \valid(obj);
 	requires \valid(a+(0..size_a-1)) && size_a>=0;
 	assigns \nothing;
-	ensures equal_post2 : size_a!=(*obj).size_array || (\exists int i; 0 <= i <= size_a-1 && a[i] != (*obj).array[i]) ==> !\result ;
 	ensures equal_post1 : (*obj).size_array==size_a && (\forall int i; 0 <= i <= (*obj).size_array-1 ==>(*obj).array[i] == a[i]) ==> \result ;
+	ensures equal_post2 : size_a!=(*obj).size_array || (\exists int i; 0 <= i <= size_a-1 && a[i] != (*obj).array[i]) ==> !\result ;
 */
 int equal(Type1* obj, int* a, int size_a){
 	if (size_a!=(*obj).size_array) return 0;
