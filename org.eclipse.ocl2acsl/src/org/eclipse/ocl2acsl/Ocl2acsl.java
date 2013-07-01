@@ -28,41 +28,16 @@ public class Ocl2acsl {
 	protected UMLEnvironmentFactory envFact;
 	protected OCLHelper<Classifier, Operation, Property, Constraint> helper;
 
-	// Causes exceptions, not used for now
-	// protected static String EXT_ID = "customOperation";
-	// protected static List<CustomOperation> allOperations =
-	// getAllOperations();
-
 	/**
 	 * Constructor
 	 */
 	@SuppressWarnings("unchecked")
 	public Ocl2acsl() {
-		// initialization of the environment
 		envFact = new UMLEnvironmentFactory();
 		ocl = OCL.newInstance(envFact);
 		helper = (OCLHelper<Classifier, Operation, Property, Constraint>) ocl
 				.createOCLHelper();
-
-		// Causes exceptions, not used for now
-		/*
-		 * for (CustomOperation c : allOperations) {
-		 * addOperationToEnvironment(c); }
-		 */
 	}
-
-	// Not used for now
-	/*
-	 * private static List<CustomOperation> getAllOperations() {
-	 * List<CustomOperation> result = new LinkedList<CustomOperation>();
-	 * IConfigurationElement[] extensions = Platform.getExtensionRegistry()
-	 * .getConfigurationElementsFor(Activator.PLUGIN_ID, EXT_ID); for
-	 * (IConfigurationElement c : extensions) { try { CustomOperation op =
-	 * (CustomOperation) c .createExecutableExtension("instance");
-	 * result.add(op); } catch (CoreException e) { e.printStackTrace(); }
-	 * 
-	 * } return result; }
-	 */
 
 	/**
 	 * Generates the ACSL contract corresponding to the given OCL pre/post
@@ -128,17 +103,6 @@ public class Ocl2acsl {
 		return result;
 	}
 
-	// Not used for now
-	/*
-	 * private void addOperationToEnvironment(CustomOperation operation) { if
-	 * (operation != null && operation.getName() != null &&
-	 * !operation.getName().isEmpty()) { UMLEnvironment umlEnvironment =
-	 * (UMLEnvironment) ocl .getEnvironment();
-	 * umlEnvironment.defineOperation(operation.getClassifier(), operation
-	 * .getName(), operation.getType(), operation.getParameters(),
-	 * org.eclipse.uml2.uml.UMLFactory.eINSTANCE .createConstraint()); } }
-	 */
-
 	/**
 	 * Returns a list of ACSL valid clauses corresponding to the pointers
 	 * introduced to represent modifiable parameters
@@ -161,6 +125,10 @@ public class Ocl2acsl {
 				String clause = "\\valid(" + p.getName() + ")";
 				validClauses.add(clause);
 			}
+		}
+		if (!op.isStatic()) {
+			String clause = "\\valid(self)";
+			validClauses.add(clause);
 		}
 		return validClauses;
 	}
@@ -203,7 +171,9 @@ public class Ocl2acsl {
 					assigned.add(param);
 				}
 			}
-
+		}
+		if (!op.isStatic()) {
+			assigned.add("*self");
 		}
 		return assigned;
 	}
@@ -239,4 +209,34 @@ public class Ocl2acsl {
 		}
 		return validClauses;
 	}
+
+	// Causes exceptions, not used for now
+	// protected static String EXT_ID = "customOperation";
+	// protected static List<CustomOperation> allOperations =
+	// getAllOperations();
+
+	// Not used for now
+	/*
+	 * private static List<CustomOperation> getAllOperations() {
+	 * List<CustomOperation> result = new LinkedList<CustomOperation>();
+	 * IConfigurationElement[] extensions = Platform.getExtensionRegistry()
+	 * .getConfigurationElementsFor(Activator.PLUGIN_ID, EXT_ID); for
+	 * (IConfigurationElement c : extensions) { try { CustomOperation op =
+	 * (CustomOperation) c .createExecutableExtension("instance");
+	 * result.add(op); } catch (CoreException e) { e.printStackTrace(); }
+	 * 
+	 * } return result; }
+	 */
+
+	// Not used for now
+	/*
+	 * private void addOperationToEnvironment(CustomOperation operation) { if
+	 * (operation != null && operation.getName() != null &&
+	 * !operation.getName().isEmpty()) { UMLEnvironment umlEnvironment =
+	 * (UMLEnvironment) ocl .getEnvironment();
+	 * umlEnvironment.defineOperation(operation.getClassifier(), operation
+	 * .getName(), operation.getType(), operation.getParameters(),
+	 * org.eclipse.uml2.uml.UMLFactory.eINSTANCE .createConstraint()); } }
+	 */
+
 }
