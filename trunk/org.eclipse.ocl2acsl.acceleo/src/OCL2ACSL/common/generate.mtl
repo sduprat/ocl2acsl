@@ -2,14 +2,14 @@
 [module generate('http://www.eclipse.org/uml2/3.0.0/UML')]
 [import wrapper/]
 
-[template public generatePropertyFile(aClass : Class)]
+[template public generatePropertyFile(class : Class)]
 [comment @main/]
-[file (aClass.name.concat('.fc'), false, 'UTF-8')]
-module [aClass.name/] :
-[for (oper : Operation | aClass.ownedOperation)]
+[file (class.name.concat('.fc'), false, 'UTF-8')]
+module [class.name/] :
+[for (oper : Operation | class.ownedOperation)]
 	function [oper.name/] :
 	contract :
-/*@[oper.getValidClauses()/][oper.getPre()/][oper.getAssignsClauses()/][oper.getPost()/]*/
+/*@[oper.getValidClauses()/][oper.getPre(class)/][oper.getAssignsClauses()/][oper.getPost(class)/]*/
 [/for]
 [/file]
 [/template]
@@ -37,15 +37,23 @@ module [aClass.name/] :
 [/template]
 
 [comment] Generation of pre conditions [/comment]
-[template public getPre(op : Operation)]
+[template public getPre(op : Operation, class : Class)]
 	[for (preCond : Constraint | op.precondition)]
 	requires [preCond.name/] : [preCond.prepost2acsl()/] ;
+	[/for]
+	[for (invariant : Constraint | class.ownedRule)]
+	requires [invariant.name/] : [invariant.inv2acsl()/] ;
 	[/for]
 [/template]
 
 [comment] Generation of post conditions [/comment]
-[template public getPost(op : Operation)]
+[template public getPost(op : Operation, class : Class)]
 	[for (postCond : Constraint | op.postcondition)]
 	ensures [postCond.name/] : [postCond.prepost2acsl()/] ;
 	[/for]
+	[for (invariant : Constraint | class.ownedRule)]
+	ensures [invariant.name/] : [invariant.inv2acsl()/] ;
+	[/for]
 [/template]
+
+
