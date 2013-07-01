@@ -1,8 +1,8 @@
 /*@	requires \valid(a+(0..size_a-1)) && size_a>=0 && \valid(b+(0..size_b-1)) && size_b>=0;
 	requires equal_pre : (size_a!=size_b || (\exists int i; 0 <= i <= size_a-1 && a[i] != b[i])) && a[size_a-1] != 0 ;
 	assigns \nothing;
-	ensures equal_post2 : (\forall int i; 0 <= i <= size_b-1 ==> (\exists int j; 0<= j <= size_a-1 && a[j] == b[i])) ==> \result && (\forall int i; 0 <= i <= size_b-1 ==> (\forall int j; 0<= j <= size_a-1 ==> a[j] != b[i])) ==> !\result ;
 	ensures equal_post : size_a == size_b && (\forall int i; (0 <= i <= size_a - 1) ==> a[i] == b[i]) ==> \result ;
+	ensures equal_post2 : (\forall int i; 0 <= i <= size_b-1 ==> (\exists int j; 0<= j <= size_a-1 && a[j] == b[i])) ==> \result && (\forall int i; 0 <= i <= size_b-1 ==> (\forall int j; 0<= j <= size_a-1 ==> a[j] != b[i])) ==> !\result ;
 */
 int equal(int* a, int size_a, int* b, int size_b) {
 	int res = 1;

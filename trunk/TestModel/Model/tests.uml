@@ -4,7 +4,7 @@
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
   </packageImport>
   <packagedElement xmi:type="uml:Class" xmi:id="_spzkIMzwEeKoasi8diYS_g" name="TestInteger">
-    <ownedOperation xmi:id="_wFqnAMzwEeKoasi8diYS_g" name="add" precondition="_UaHQgMzxEeKoasi8diYS_g" postcondition="_EjZPcMzxEeKoasi8diYS_g">
+    <ownedOperation xmi:id="_wFqnAMzwEeKoasi8diYS_g" name="add" isStatic="true" precondition="_UaHQgMzxEeKoasi8diYS_g" postcondition="_EjZPcMzxEeKoasi8diYS_g">
       <ownedRule xmi:id="_EjZPcMzxEeKoasi8diYS_g" name="add_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_EjZ2gMzxEeKoasi8diYS_g" name="" value="result = a +b and b = result -a"/>
       </ownedRule>
@@ -23,7 +23,7 @@
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6An0QMzwEeKoasi8diYS_g" value="1"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_eeAXUMzxEeKoasi8diYS_g" name="mult" postcondition="_mbiOkMzxEeKoasi8diYS_g">
+    <ownedOperation xmi:id="_eeAXUMzxEeKoasi8diYS_g" name="mult" isStatic="true" postcondition="_mbiOkMzxEeKoasi8diYS_g">
       <ownedRule xmi:id="_mbiOkMzxEeKoasi8diYS_g" name="mult_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_mbiOkczxEeKoasi8diYS_g" name="" value="result = a*b and result.div(a) = b and (a*b).mod(a) = 0"/>
       </ownedRule>
@@ -37,7 +37,7 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_HgL7QMzyEeKoasi8diYS_g" name="max" postcondition="_PnA4cMzyEeKoasi8diYS_g">
+    <ownedOperation xmi:id="_HgL7QMzyEeKoasi8diYS_g" name="max" isStatic="true" postcondition="_PnA4cMzyEeKoasi8diYS_g">
       <ownedRule xmi:id="_PnA4cMzyEeKoasi8diYS_g" name="max_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_PnA4cczyEeKoasi8diYS_g" name="" value="result = a.max(b) "/>
       </ownedRule>
@@ -51,7 +51,7 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_vxSjYMz5EeKoasi8diYS_g" name="zero" postcondition="_0HmcUMz5EeKoasi8diYS_g">
+    <ownedOperation xmi:id="_vxSjYMz5EeKoasi8diYS_g" name="zero" isStatic="true" postcondition="_0HmcUMz5EeKoasi8diYS_g">
       <ownedRule xmi:id="_0HmcUMz5EeKoasi8diYS_g" name="zero_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_0HnDYMz5EeKoasi8diYS_g" name="" value="n = 0"/>
       </ownedRule>
@@ -61,7 +61,7 @@
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_OLL-MMzzEeKoasi8diYS_g" name="TestBoolean">
-    <ownedOperation xmi:id="_V9om0MzzEeKoasi8diYS_g" name="booleans" precondition="_4vfcMMzzEeKoasi8diYS_g" postcondition="_A6hj8Mz0EeKoasi8diYS_g">
+    <ownedOperation xmi:id="_V9om0MzzEeKoasi8diYS_g" name="booleans" isStatic="true" precondition="_4vfcMMzzEeKoasi8diYS_g" postcondition="_A6hj8Mz0EeKoasi8diYS_g">
       <ownedRule xmi:id="_4vfcMMzzEeKoasi8diYS_g" name="bool_pre">
         <specification xmi:type="uml:LiteralString" xmi:id="_4vfcMczzEeKoasi8diYS_g" name="" value="b1 = true or b1 = false and b2 or not(b2)"/>
       </ownedRule>
@@ -80,7 +80,7 @@
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_kdFdgMz0EeKoasi8diYS_g" name="TestArray">
-    <ownedOperation xmi:id="_vZ3UIMz0EeKoasi8diYS_g" name="equal" precondition="_xH2EoM0PEeKoasi8diYS_g" postcondition="_FQ__gMz1EeKoasi8diYS_g _T_E6QM21EeKdztKa44TOPg">
+    <ownedOperation xmi:id="_vZ3UIMz0EeKoasi8diYS_g" name="equal" isStatic="true" precondition="_xH2EoM0PEeKoasi8diYS_g" postcondition="_FQ__gMz1EeKoasi8diYS_g _T_E6QM21EeKdztKa44TOPg">
       <ownedRule xmi:id="_FQ__gMz1EeKoasi8diYS_g" name="equal_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_FQ__gcz1EeKoasi8diYS_g" name="" value="(size_a = size_b and Sequence{0..size_a-1} -> forAll( i | a->at(i) = b->at(i))) implies result"/>
       </ownedRule>
@@ -110,7 +110,7 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_i6PqYMz3EeKoasi8diYS_g" name="replace0" precondition="_8oE7cM2wEeKdztKa44TOPg _rRLt0M3AEeKdztKa44TOPg" postcondition="_uHb7kMz3EeKoasi8diYS_g _GG_OUM9QEeKrTtzpQ8tdfw _g3n14NHaEeKIJuZqc6i_Ng">
+    <ownedOperation xmi:id="_i6PqYMz3EeKoasi8diYS_g" name="replace0" isStatic="true" precondition="_8oE7cM2wEeKdztKa44TOPg _rRLt0M3AEeKdztKa44TOPg" postcondition="_uHb7kMz3EeKoasi8diYS_g _GG_OUM9QEeKrTtzpQ8tdfw _g3n14NHaEeKIJuZqc6i_Ng">
       <ownedRule xmi:id="_uHb7kMz3EeKoasi8diYS_g" name="replace0_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_uHb7kcz3EeKoasi8diYS_g" name="" value="a->first() = o and a->includes(o)"/>
       </ownedRule>
@@ -138,7 +138,7 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_LQTvMMz4EeKoasi8diYS_g" name="zeros" postcondition="_Wiq0QMz4EeKoasi8diYS_g">
+    <ownedOperation xmi:id="_LQTvMMz4EeKoasi8diYS_g" name="zeros" isStatic="true" postcondition="_Wiq0QMz4EeKoasi8diYS_g">
       <ownedRule xmi:id="_Wiq0QMz4EeKoasi8diYS_g" name="zeros_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_WirbUMz4EeKoasi8diYS_g" name="" value="a -> forAll ( x | x = 0) and a -> excludes(1)"/>
       </ownedRule>
@@ -153,7 +153,7 @@
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_hNrTgMz6EeKoasi8diYS_g" name="TestDataType">
-    <ownedOperation xmi:id="_-D-wcMz6EeKoasi8diYS_g" name="id" postcondition="_FynQEMz7EeKoasi8diYS_g">
+    <ownedOperation xmi:id="_-D-wcMz6EeKoasi8diYS_g" name="id" isStatic="true" postcondition="_FynQEMz7EeKoasi8diYS_g">
       <ownedRule xmi:id="_FynQEMz7EeKoasi8diYS_g" name="id_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_FynQEcz7EeKoasi8diYS_g" name="" value="result = obj.id"/>
       </ownedRule>
@@ -162,7 +162,7 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_KxngsMz7EeKoasi8diYS_g" name="zeros" precondition="_n1sB8Mz9EeKoasi8diYS_g" postcondition="_cStY4Mz7EeKoasi8diYS_g _csixgNf5EeKlIdJnklw0eA">
+    <ownedOperation xmi:id="_KxngsMz7EeKoasi8diYS_g" name="zeros" isStatic="true" precondition="_n1sB8Mz9EeKoasi8diYS_g" postcondition="_cStY4Mz7EeKoasi8diYS_g _csixgNf5EeKlIdJnklw0eA">
       <ownedRule xmi:id="_cStY4Mz7EeKoasi8diYS_g" name="zeros_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_cSt_8Mz7EeKoasi8diYS_g" name="" value="obj.array -> forAll(x | x=0) and obj.array -> excludes(1) and obj.array -> includes(0)"/>
       </ownedRule>
@@ -174,13 +174,13 @@
       </ownedRule>
       <ownedParameter xmi:id="_YXWWkMz7EeKoasi8diYS_g" name="obj" type="_kTYgMMz6EeKoasi8diYS_g" direction="inout" effect="update"/>
     </ownedOperation>
-    <ownedOperation xmi:id="_NOUXMMz8EeKoasi8diYS_g" name="incId" postcondition="_RehoIMz8EeKoasi8diYS_g">
+    <ownedOperation xmi:id="_NOUXMMz8EeKoasi8diYS_g" name="incId" isStatic="true" postcondition="_RehoIMz8EeKoasi8diYS_g">
       <ownedRule xmi:id="_RehoIMz8EeKoasi8diYS_g" name="inc_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_ReiPMMz8EeKoasi8diYS_g" name="" value="obj.id@pre = obj.id - 1 and if obj.id@pre = 0 then obj.id@pre = 1 else obj.id@pre &lt;>1 endif"/>
       </ownedRule>
       <ownedParameter xmi:id="_QJYaIMz8EeKoasi8diYS_g" name="obj" type="_kTYgMMz6EeKoasi8diYS_g" isUnique="false" direction="inout" effect="update"/>
     </ownedOperation>
-    <ownedOperation xmi:id="_9Dv8UM0XEeKoasi8diYS_g" name="equal" postcondition="_IB0zcM0YEeKoasi8diYS_g _6tlrUM0ZEeKoasi8diYS_g">
+    <ownedOperation xmi:id="_9Dv8UM0XEeKoasi8diYS_g" name="equal" isStatic="true" postcondition="_IB0zcM0YEeKoasi8diYS_g _6tlrUM0ZEeKoasi8diYS_g">
       <ownedRule xmi:id="_IB0zcM0YEeKoasi8diYS_g" name="equal_post1">
         <specification xmi:type="uml:LiteralString" xmi:id="_IB0zcc0YEeKoasi8diYS_g" name="" value="(obj.array = a) implies result"/>
       </ownedRule>
@@ -202,7 +202,7 @@
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_xlpYsM3EEeKyH7gI8x7L8w" name="TestReal">
-    <ownedOperation xmi:id="_0NlEQM3EEeKyH7gI8x7L8w" name="add" postcondition="__iixYM3EEeKyH7gI8x7L8w">
+    <ownedOperation xmi:id="_0NlEQM3EEeKyH7gI8x7L8w" name="add" isStatic="true" postcondition="__iixYM3EEeKyH7gI8x7L8w">
       <ownedRule xmi:id="__iixYM3EEeKyH7gI8x7L8w" name="add_post">
         <specification xmi:type="uml:LiteralString" xmi:id="__ijYcM3EEeKyH7gI8x7L8w" name="" value="result=a+b and a = result-b"/>
       </ownedRule>
@@ -210,7 +210,7 @@
       <ownedParameter xmi:id="_1Lp2EM3EEeKyH7gI8x7L8w" name="b" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" effect="read"/>
       <ownedParameter xmi:id="_1aEskM3EEeKyH7gI8x7L8w" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" direction="return"/>
     </ownedOperation>
-    <ownedOperation xmi:id="_wq2OQM3NEeKyH7gI8x7L8w" name="mult" postcondition="_5bin0M3NEeKyH7gI8x7L8w">
+    <ownedOperation xmi:id="_wq2OQM3NEeKyH7gI8x7L8w" name="mult" isStatic="true" postcondition="_5bin0M3NEeKyH7gI8x7L8w">
       <ownedRule xmi:id="_5bin0M3NEeKyH7gI8x7L8w" name="mult_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_5bjO4M3NEeKyH7gI8x7L8w" name="" value="result = a*b and a = result/b "/>
       </ownedRule>
@@ -218,7 +218,7 @@
       <ownedParameter xmi:id="_yfusQM3NEeKyH7gI8x7L8w" name="b" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" effect="read"/>
       <ownedParameter xmi:id="_y88MsM3NEeKyH7gI8x7L8w" name="" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" direction="return"/>
     </ownedOperation>
-    <ownedOperation xmi:id="_OJ00wM3OEeKyH7gI8x7L8w" name="max" postcondition="_USNIQM3OEeKyH7gI8x7L8w">
+    <ownedOperation xmi:id="_OJ00wM3OEeKyH7gI8x7L8w" name="max" isStatic="true" postcondition="_USNIQM3OEeKyH7gI8x7L8w">
       <ownedRule xmi:id="_USNIQM3OEeKyH7gI8x7L8w" name="max_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_USNIQc3OEeKyH7gI8x7L8w" name="" value="result = a.max(b) and result >= a and result >= b"/>
       </ownedRule>
@@ -226,7 +226,7 @@
       <ownedParameter xmi:id="_P1eeQM3OEeKyH7gI8x7L8w" name="b" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" effect="read"/>
       <ownedParameter xmi:id="_QJ3Z4M3OEeKyH7gI8x7L8w" type="_hVvsgM3NEeKyH7gI8x7L8w" isUnique="false" direction="return"/>
     </ownedOperation>
-    <ownedOperation xmi:id="_rTWvsM3OEeKyH7gI8x7L8w" name="zero" postcondition="_u1jrIM3OEeKyH7gI8x7L8w">
+    <ownedOperation xmi:id="_rTWvsM3OEeKyH7gI8x7L8w" name="zero" isStatic="true" postcondition="_u1jrIM3OEeKyH7gI8x7L8w">
       <ownedRule xmi:id="_u1jrIM3OEeKyH7gI8x7L8w" name="zero_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_u1kSMM3OEeKyH7gI8x7L8w" name="" value="a.abs() = 0"/>
       </ownedRule>
@@ -235,7 +235,7 @@
   </packagedElement>
   <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_hVvsgM3NEeKyH7gI8x7L8w" name="Real"/>
   <packagedElement xmi:type="uml:Class" xmi:id="_v-DKoNGnEeKHFZ-3I-xkiw" name="Wiki">
-    <ownedOperation xmi:id="_zIS5ENGnEeKHFZ-3I-xkiw" name="wikiOperation" precondition="_DYLBANGoEeKHFZ-3I-xkiw" postcondition="_H0ai0NGoEeKHFZ-3I-xkiw">
+    <ownedOperation xmi:id="_zIS5ENGnEeKHFZ-3I-xkiw" name="wikiOperation" isStatic="true" precondition="_DYLBANGoEeKHFZ-3I-xkiw" postcondition="_H0ai0NGoEeKHFZ-3I-xkiw">
       <ownedRule xmi:id="_DYLBANGoEeKHFZ-3I-xkiw" name="wikiPre">
         <specification xmi:type="uml:LiteralString" xmi:id="_DYLoENGoEeKHFZ-3I-xkiw" name="" value="n &lt;> 0"/>
       </ownedRule>
@@ -256,7 +256,7 @@
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_dr86ANGsEeKHFZ-3I-xkiw" name="TestCstArray">
-    <ownedOperation xmi:id="_BVN4gNGtEeKHFZ-3I-xkiw" name="equal" postcondition="_LKXYsNGtEeKHFZ-3I-xkiw">
+    <ownedOperation xmi:id="_BVN4gNGtEeKHFZ-3I-xkiw" name="equal" isStatic="true" postcondition="_LKXYsNGtEeKHFZ-3I-xkiw">
       <ownedRule xmi:id="_LKXYsNGtEeKHFZ-3I-xkiw" name="equal_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_LKXYsdGtEeKHFZ-3I-xkiw" name="" value="result implies a -> includes(b->first()) "/>
       </ownedRule>
@@ -274,7 +274,7 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_u6nwANGtEeKHFZ-3I-xkiw" name="zeros" postcondition="_4vsXsNGtEeKHFZ-3I-xkiw">
+    <ownedOperation xmi:id="_u6nwANGtEeKHFZ-3I-xkiw" name="zeros" isStatic="true" postcondition="_4vsXsNGtEeKHFZ-3I-xkiw">
       <ownedRule xmi:id="_4vsXsNGtEeKHFZ-3I-xkiw" name="zeros_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_4vs-wNGtEeKHFZ-3I-xkiw" name="" value="a -> forAll( x | x=0)"/>
       </ownedRule>
@@ -378,7 +378,7 @@
     </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_OT7VMNQfEeKWB5uGPyfeWw" name="TestAssociation">
-    <ownedOperation xmi:id="_RDiWENQfEeKWB5uGPyfeWw" name="test" postcondition="_VmC38NQfEeKWB5uGPyfeWw">
+    <ownedOperation xmi:id="_RDiWENQfEeKWB5uGPyfeWw" name="test" isStatic="true" postcondition="_VmC38NQfEeKWB5uGPyfeWw">
       <ownedRule xmi:id="_VmC38NQfEeKWB5uGPyfeWw" name="test_post">
         <specification xmi:type="uml:LiteralString" xmi:id="_VmEGENQfEeKWB5uGPyfeWw" name="" value="obj.c1.id = 0 and obj.cN -> forAll(x | x.id=0) and obj.c -> forAll(x | x.id=0) and obj.a1.id=0 and obj.aN -> forAll( x | x.id=0) and obj.a -> forAll(x | x.id=0)"/>
       </ownedRule>
@@ -413,5 +413,22 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_n_tYwdgCEeKlIdJnklw0eA" value="1"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_n_tYwtgCEeKlIdJnklw0eA" value="1"/>
     </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_nDLxwOJYEeKNwJzoYZoD2Q" name="MyObject">
+    <ownedRule xmi:id="_4OpYMOJYEeKNwJzoYZoD2Q" name="Inv1">
+      <specification xmi:type="uml:LiteralString" xmi:id="_4Op_QOJYEeKNwJzoYZoD2Q" name="" value="id = 0"/>
+    </ownedRule>
+    <ownedRule xmi:id="_7iV9kOJYEeKNwJzoYZoD2Q" name="Inv2">
+      <specification xmi:type="uml:LiteralString" xmi:id="_7iWkoOJYEeKNwJzoYZoD2Q" name="" value="myTab -> forAll( x | x = 0 )"/>
+    </ownedRule>
+    <ownedAttribute xmi:id="_s4XccOJYEeKNwJzoYZoD2Q" name="id" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_vXH94OJYEeKNwJzoYZoD2Q" name="myTab">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wVse8OJYEeKNwJzoYZoD2Q" value="5"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wVr34OJYEeKNwJzoYZoD2Q" value="5"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_BHTa8OJZEeKNwJzoYZoD2Q" name="test"/>
   </packagedElement>
 </uml:Model>
