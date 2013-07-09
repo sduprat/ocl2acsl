@@ -64,7 +64,7 @@ The tool generates the corresponding Wiki.fc file:
 
 = Assumptions for translation =
 
-This section describes the constraints we established for code annotated by the generated ACSL contract. This tool does not provide an implementation of these patterns but strongly depends on them for contract generation.
+C code generated from the UML model must be generated according to the following assumptions. This tool does not provide an implementation of these patterns but strongly depends on them for contract generation.
 
 == Datatypes ==
 
