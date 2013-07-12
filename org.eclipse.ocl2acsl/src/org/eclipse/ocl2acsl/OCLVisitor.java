@@ -84,10 +84,7 @@ public class OCLVisitor
 			// Composition or attribute
 			if (kind == AggregationKind.COMPOSITE_LITERAL
 					|| kind == AggregationKind.NONE_LITERAL)
-				if (source.equals("self"))
-					return maybeAtPre(callExp, "self->" + property.getName());
-				else
-					return maybeAtPre(callExp,
+				return maybeAtPre(callExp,
 							"(" + source + ")." + property.getName());
 			// Aggregation
 			if (kind == AggregationKind.SHARED_LITERAL) {
@@ -540,6 +537,7 @@ public class OCLVisitor
 			if (isPointer(param))
 				return "*" + v.getName();
 		}
+		if (v.getName().equals("self")) return "*self";
 		if (v.getName().equals("result")) {
 			return "\\result";
 		}

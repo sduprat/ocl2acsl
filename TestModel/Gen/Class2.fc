@@ -3,5 +3,5 @@ module Class2 :
 	contract :
 /*@	requires \valid(self);
 	assigns *self;
-	ensures test2_post : \forall int it_c; (0 <= it_c <= CLASS2_CLASS1_SIZE-1) ==> \let c=self->class1[it_c];(\exists int i; 0 <= i <= CLASS1_PROP1_SIZE-1 && (c).prop1[i] == 0) ;
+	ensures test2_post : \forall int it_c; (0 <= it_c <= CLASS2_CLASS1_SIZE-1) ==> \let c=(*self).class1[it_c];(\exists int i; 0 <= i <= CLASS1_PROP1_SIZE-1 && (c).prop1[i] == 0) ;
 */
