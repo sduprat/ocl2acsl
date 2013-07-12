@@ -11,7 +11,7 @@ typedef struct Class2 {
 
 /*@	requires \valid(self);
 	assigns *self;
-	ensures test_post : \forall int it_x; (0 <= it_x <= CLASS1_PROP1_SIZE-1) ==> \let x=self->prop1[it_x];(x == 0) ;
+	ensures test_post : \forall int it_x; (0 <= it_x <= CLASS1_PROP1_SIZE-1) ==> \let x=(*self).prop1[it_x];(x == 0) ;
 */
 
 void test(Class1* self){
@@ -22,7 +22,7 @@ void test(Class1* self){
 
 /*@	requires \valid(self);
 	assigns *self;
-	ensures test2_post : \forall int it_c; (0 <= it_c <= CLASS2_CLASS1_SIZE-1) ==> \let c=self->class1[it_c];(\exists int i; 0 <= i <= CLASS1_PROP1_SIZE-1 && (c).prop1[i] == 0) ;
+	ensures test2_post : \forall int it_c; (0 <= it_c <= CLASS2_CLASS1_SIZE-1) ==> \let c=(*self).class1[it_c];(\exists int i; 0 <= i <= CLASS1_PROP1_SIZE-1 && (c).prop1[i] == 0) ;
 */
 void test2(Class2* self){
 	for (int i=0;i<CLASS2_CLASS1_SIZE;i++){

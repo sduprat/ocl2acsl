@@ -431,4 +431,25 @@
     </ownedAttribute>
     <ownedOperation xmi:id="_BHTa8OJZEeKNwJzoYZoD2Q" name="test"/>
   </packagedElement>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_SAk_UOrXEeK-4NIe9iM-mA" name="Array1D">
+    <ownedAttribute xmi:id="_gtopoOrXEeK-4NIe9iM-mA" name="array">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jTGQAOrXEeK-4NIe9iM-mA" value="9"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jGNDgOrXEeK-4NIe9iM-mA" value="9"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_nPZGcOrXEeK-4NIe9iM-mA" name="Array2D">
+    <ownedAttribute xmi:id="_rt7uUOrXEeK-4NIe9iM-mA" name="array" type="_SAk_UOrXEeK-4NIe9iM-mA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vxiGoOrXEeK-4NIe9iM-mA" value="10"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vgYsQOrXEeK-4NIe9iM-mA" value="10"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_wrwTMOrXEeK-4NIe9iM-mA" name="Test2DArray">
+    <ownedAttribute xmi:id="_yyA1EOrXEeK-4NIe9iM-mA" name="array2d" type="_nPZGcOrXEeK-4NIe9iM-mA"/>
+    <ownedOperation xmi:id="_2c6ZgOrXEeK-4NIe9iM-mA" name="test" postcondition="_447I8OrXEeK-4NIe9iM-mA">
+      <ownedRule xmi:id="_447I8OrXEeK-4NIe9iM-mA" name="test_post">
+        <specification xmi:type="uml:LiteralString" xmi:id="_447wAOrXEeK-4NIe9iM-mA" name="" value="array2d.array -> forAll( x | x.array -> forAll(y | y = 0) )"/>
+      </ownedRule>
+    </ownedOperation>
+  </packagedElement>
 </uml:Model>
