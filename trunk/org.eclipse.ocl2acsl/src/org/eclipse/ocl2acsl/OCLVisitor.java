@@ -79,29 +79,33 @@ public class OCLVisitor
 			else
 				return maybeAtPre(callExp, "self->" + property.getName());
 		} else {
-			String source = sourceExp.accept(this);
-			AggregationKind kind = property.getAggregation();
-			// Composition or attribute
-			if (kind == AggregationKind.COMPOSITE_LITERAL
-					|| kind == AggregationKind.NONE_LITERAL)
-				return maybeAtPre(callExp,
-							"(" + source + ")." + property.getName());
-			// Aggregation
-			if (kind == AggregationKind.SHARED_LITERAL) {
-				// Aggregation with multiplicity 1 == pointer
-				if (property.getLower() == property.getUpper()
-						&& property.getLower() == 1)
+			if (property.isStatic()) {
+				return maybeAtPre(callExp, property.getName());
+			} else {
+				String source = sourceExp.accept(this);
+				AggregationKind kind = property.getAggregation();
+				// Composition or attribute
+				if (kind == AggregationKind.COMPOSITE_LITERAL
+						|| kind == AggregationKind.NONE_LITERAL)
 					return maybeAtPre(callExp,
-							"*((" + source + ")." + property.getName() + ")");
-				// Aggregation with multiplicity n..n or 0..* == array of
-				// pointers
-				// For now, we return the name of the array and we only apply
-				// the * after indexing the array
-				// See maybePointerProperty
-				else
-					return maybeAtPre(callExp,
-							"(" + source + ")." + property.getName());
-			}
+								"(" + source + ")." + property.getName());
+				// Aggregation
+				if (kind == AggregationKind.SHARED_LITERAL) {
+					// Aggregation with multiplicity 1 == pointer
+					if (property.getLower() == property.getUpper()
+							&& property.getLower() == 1)
+						return maybeAtPre(callExp,
+								"*((" + source + ")." + property.getName() + ")");
+					// Aggregation with multiplicity n..n or 0..* == array of
+					// pointers
+					// For now, we return the name of the array and we only apply
+					// the * after indexing the array
+					// See maybePointerProperty
+					else
+						return maybeAtPre(callExp,
+								"(" + source + ")." + property.getName());
+				}
+			}		
 			throw new IllegalArgumentException("Unhandled kind of property"
 					+ property.getName() + property.getAggregation());
 		}
@@ -811,12 +815,23 @@ public class OCLVisitor
 	public String visitNullLiteralExp(NullLiteralExp<Classifier> literalExp) {
 		return "\\null";
 	}
+	
+	/**
+	 * Not implemented
+	 */
+	@Override
+	public String visitEnumLiteralExp(
+			EnumLiteralExp<Classifier, EnumerationLiteral> literalExp) {
+		EnumerationLiteral enumLiteral = literalExp.getReferredEnumLiteral();
+		return enumLiteral.getName();
+	}
 
 	@Override
 	public String visitExpressionInOCL(
 			ExpressionInOCL<Classifier, Parameter> expression) {
 		return expression.getBodyExpression().accept(this);
 	}
+
 
 	/**
 	 * Not implemented
@@ -902,15 +917,6 @@ public class OCLVisitor
 	public String visitTupleLiteralPart(
 			TupleLiteralPart<Classifier, Property> part) {
 		return "TupleLiteralPart";
-	}
-
-	/**
-	 * Not implemented
-	 */
-	@Override
-	public String visitEnumLiteralExp(
-			EnumLiteralExp<Classifier, EnumerationLiteral> literalExp) {
-		return "EnumLiteralExp";
 	}
 
 	/**
