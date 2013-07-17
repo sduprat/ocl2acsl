@@ -39,6 +39,7 @@ import org.eclipse.uml2.uml.CallOperationAction;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Constraint;
 import org.eclipse.uml2.uml.DataType;
+import org.eclipse.uml2.uml.Enumeration;
 import org.eclipse.uml2.uml.EnumerationLiteral;
 import org.eclipse.uml2.uml.Operation;
 import org.eclipse.uml2.uml.Parameter;
@@ -72,16 +73,13 @@ public class OCLVisitor
 		Property property = callExp.getReferredProperty();
 		OCLExpression<Classifier> sourceExp = callExp.getSource();
 		if (sourceExp == null) {
-			// Static attribute => global variable => direct access
-			if (property.isStatic())
-				return maybeAtPre(callExp, property.getName());
-			// Non static attribute => access through the self instance
-			else
-				return maybeAtPre(callExp, "self->" + property.getName());
+			return maybeAtPre(callExp, property.getName());
 		} else {
-			if (property.isStatic()) {
+			if (sourceExp.toString().equals("self")) {
+				// Access to module property => Global Variable
 				return maybeAtPre(callExp, property.getName());
 			} else {
+				// Access to property of parameter
 				String source = sourceExp.accept(this);
 				AggregationKind kind = property.getAggregation();
 				// Composition or attribute
@@ -554,9 +552,10 @@ public class OCLVisitor
 	private Boolean isPointer(Parameter param) {
 		Type type = param.getType();
 		Boolean isPrimitive = (type instanceof PrimitiveType);
+		Boolean isEnum = (type instanceof Enumeration);
 		return ((param.getDirection()
 				.equals(ParameterDirectionKind.OUT_LITERAL) || param
-				.getDirection().equals(ParameterDirectionKind.INOUT_LITERAL)) || !isPrimitive);
+				.getDirection().equals(ParameterDirectionKind.INOUT_LITERAL)) || (!isPrimitive && !isEnum));
 	}
 
 	/*
@@ -823,6 +822,7 @@ public class OCLVisitor
 	public String visitEnumLiteralExp(
 			EnumLiteralExp<Classifier, EnumerationLiteral> literalExp) {
 		EnumerationLiteral enumLiteral = literalExp.getReferredEnumLiteral();
+		
 		return enumLiteral.getName();
 	}
 
