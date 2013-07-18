@@ -1,3 +1,15 @@
+/*****************************************************************************
+ * Copyright (c) 2013 Atos.
+ *
+ *    
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *
+ *****************************************************************************/
+
 package org.eclipse.ocl2acsl;
 
 import org.eclipse.emf.common.util.EList;
@@ -164,31 +176,40 @@ public class OCLVisitor
 			op1 = maybePointerProperty(callExp.getSource(), op1);
 			return op1 + "[" + op2 + "]";
 		}
-		if (isUnaryOperator(callExp)) {
+		if (isUnaryOperator(callExp)){
 			String op1 = callExp.getSource().accept(this);
-			if (needParenthesis(callExp.getSource(), oper)) {
+			if (needParenthesis(callExp.getSource(), oper)){
 				op1 = "(" + op1 + ")";
 			}
-			if (oper.equals("-") || oper.equals("!")) {
-				return oper + op1;
+			if (Ocl2acsl.acslOperationNotationType.containsKey(oper)){
+				if (Ocl2acsl.acslOperationNotationType.get(oper).equals("infix")){
+					return  oper + op1 ;
+				}if (Ocl2acsl.acslOperationNotationType.get(oper).equals("procedural")){
+					return oper + "(" + op1 + ")" ;
+				} else {
+					return "Error for an unary operator Notation type Should be infix or procedural" ;
+				}
+			}
+			if (oper.equals("-") || oper.equals("!")){
+				return  oper + op1 ;
 			} else {
-				return "\\" + oper + "(" + op1 + ")";
+				return oper + "(" + op1 + ")" ;
 			}
 		}
-		if (isBinaryOperator(callExp)) {
+		if (isBinaryOperator(callExp)){
 			String op1 = callExp.getSource().accept(this);
-			if (needParenthesis(callExp.getSource(), oper)) {
+			if (needParenthesis(callExp.getSource(), oper)){
 				op1 = "(" + op1 + ")";
 			}
 			String op2 = callExp.getArgument().get(0).accept(this);
-			if (needParenthesis(callExp.getArgument().get(0), oper)) {
+			if (needParenthesis(callExp.getArgument().get(0), oper)){
 				op2 = "(" + op2 + ")";
-			}
-			if (isInfix(oper)) {
-				return op1 + " " + oper + " " + op2;
-			} else {
-				return "\\" + oper + "(" + op1 + ", " + op2 + ")";
-			}
+			 	}
+			if (isInfix(oper)){
+				return op1 + " " + oper+ " " + op2  ;
+			 	} else {
+			 		return oper + "(" + op1 + ", " + op2 +")" ;
+			 	}
 		}
 		throw new IllegalArgumentException("Operator " + oper
 				+ " not supported");
@@ -218,6 +239,7 @@ public class OCLVisitor
 			return "%";
 		if (oper.equals("round"))
 			return "ceil";
+		if (Ocl2acsl.acslOperationName.containsKey(oper)) return Ocl2acsl.acslOperationName.get(oper);
 		return oper;
 	}
 
@@ -225,6 +247,9 @@ public class OCLVisitor
 	 * Checks if an operator should be written infix-style in ACSL
 	 */
 	private boolean isInfix(String oper) {
+		if (Ocl2acsl.acslOperationNotationType.containsKey(oper)) {
+			return Ocl2acsl.acslOperationNotationType.get(oper).equals("infix");
+		}
 		return oper.equals("*") || oper.equals("/") || oper.equals("+")
 				|| oper.equals("-") || oper.equals("<") || oper.equals(">")
 				|| oper.equals("<=") || oper.equals(">=") || oper.equals("==")
