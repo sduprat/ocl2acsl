@@ -44,6 +44,8 @@ import org.eclipse.ocl.expressions.UnspecifiedValueExp;
 import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.ocl.expressions.VariableExp;
 import org.eclipse.ocl.uml.SequenceType;
+import org.eclipse.ocl.uml.TypeType;
+import org.eclipse.ocl.uml.impl.TypeTypeImpl;
 import org.eclipse.ocl.utilities.AbstractVisitor;
 import org.eclipse.ocl.utilities.ExpressionInOCL;
 import org.eclipse.uml2.uml.AggregationKind;
@@ -95,6 +97,9 @@ public class OCLVisitor
 				String source = sourceExp.accept(this);
 				AggregationKind kind = property.getAggregation();
 				// Composition or attribute
+				if (callExp.getSource().getType() instanceof TypeTypeImpl){
+					return maybeAtPre(callExp,property.getName());
+				}
 				if (kind == AggregationKind.COMPOSITE_LITERAL
 						|| kind == AggregationKind.NONE_LITERAL)
 					return maybeAtPre(callExp,
@@ -182,7 +187,7 @@ public class OCLVisitor
 				op1 = "(" + op1 + ")";
 			}
 			if (Ocl2acsl.acslOperationNotationType.containsKey(oper)){
-				if (Ocl2acsl.acslOperationNotationType.get(oper).equals("infix")){
+				if (Ocl2acsl.acslOperationNotationType.get(oper).equals("prefix")){
 					return  oper + op1 ;
 				}if (Ocl2acsl.acslOperationNotationType.get(oper).equals("procedural")){
 					return oper + "(" + op1 + ")" ;
@@ -888,7 +893,7 @@ public class OCLVisitor
 	 */
 	@Override
 	public String visitTypeExp(TypeExp<Classifier> t) {
-		return "TypeExp";
+		return "";
 	}
 
 	/**
