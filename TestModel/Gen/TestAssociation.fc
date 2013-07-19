@@ -1,7 +1,0 @@
-module TestAssociation :
-	function test :
-	contract :
-/*@	requires \valid(obj);
-	assigns *obj;
-	ensures test_post : ((*obj).c1).id == 0 && (\forall int it_x; (0 <= it_x <= DATATYPE2_CN_SIZE-1) ==> \let x=(*obj).cN[it_x];((x).id == 0)) && (\forall int it_x; (0 <= it_x <= (*obj).size_c-1) ==> \let x=(*obj).c[it_x];((x).id == 0)) && (*((*obj).a1)).id == 0 && (\forall int it_x; (0 <= it_x <= DATATYPE2_AN_SIZE-1) ==> \let x=*((*obj).aN[it_x]);((x).id == 0)) && (\forall int it_x; (0 <= it_x <= (*obj).size_a-1) ==> \let x=*((*obj).a[it_x]);((x).id == 0)) ;
-*/
