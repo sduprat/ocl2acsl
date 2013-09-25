@@ -52,6 +52,7 @@ public class Ocl2acsl {
     protected static List<CustomOperation> allOperations = getAllOperations();
     
     
+	@SuppressWarnings("unchecked")
 	public Ocl2acsl() {
 		//initialization of the environment
 		envFact = new UMLEnvironmentFactory();

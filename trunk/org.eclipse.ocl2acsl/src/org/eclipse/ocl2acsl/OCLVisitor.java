@@ -44,7 +44,6 @@ import org.eclipse.ocl.expressions.UnspecifiedValueExp;
 import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.ocl.expressions.VariableExp;
 import org.eclipse.ocl.uml.SequenceType;
-import org.eclipse.ocl.uml.TypeType;
 import org.eclipse.ocl.uml.impl.TypeTypeImpl;
 import org.eclipse.ocl.utilities.AbstractVisitor;
 import org.eclipse.ocl.utilities.ExpressionInOCL;
@@ -140,6 +139,7 @@ public class OCLVisitor
 	 *            The {@link OperationCallExp} to visit
 	 * @return A String representing the translation of the operation in ACSL
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public String visitOperationCallExp(
 			OperationCallExp<Classifier, Operation> callExp) {
@@ -176,10 +176,25 @@ public class OCLVisitor
 			return maybePointerProperty(callExp.getSource(), base);
 		}
 		if (oper.equals("at")) {
-			String op1 = callExp.getSource().accept(this);
+			boolean addPre = false;
+			OCLExpression<Classifier> source = callExp.getSource();
+			if (source instanceof PropertyCallExp && ((PropertyCallExp<Classifier, Property>) source).isMarkedPre()) {
+				addPre = true;
+				((PropertyCallExp<Classifier, Property>) source).setMarkedPre(false);
+			}
+			String op1 = source.accept(this);
 			String op2 = callExp.getArgument().get(0).accept(this);
-			op1 = maybePointerProperty(callExp.getSource(), op1);
-			return op1 + "[" + op2 + "]";
+			op1 = maybePointerProperty(source, op1);
+			String res = op1 + "[" + op2 + "]";
+			if (addPre) res = "\\old(" + res + ")";
+			return res;
+		}
+		if (oper.equals("oclAsType")) return callExp.getSource().accept(this);
+		if (oper.equals("subSequence")) {
+			String source = callExp.getSource().accept(this);
+			String offset = callExp.getArgument().get(0).accept(this);
+			source = maybePointerProperty(callExp.getSource(), source);
+			return source + " + " + offset;
 		}
 		if (isUnaryOperator(callExp)){
 			String op1 = callExp.getSource().accept(this);
@@ -432,7 +447,7 @@ public class OCLVisitor
 	 */
 	public String visitEqualNonEqualCall(
 			OperationCallExp<Classifier, Operation> callExp, String oper) {
-		OCLExpression<Classifier> array1 = callExp.getSource();
+		/*OCLExpression<Classifier> array1 = callExp.getSource();
 		OCLExpression<Classifier> array2 = callExp.getArgument().get(0);
 		Boolean equals = oper.equals("==");
 		String size1 = getSizeParamName(array1);
@@ -447,7 +462,15 @@ public class OCLVisitor
 					+ ub1 + " ==>" + tab1 + " == " + tab2 + ")";
 		else
 			return size1 + "!=" + size2 + " || (\\exists int i; 0 <= i <= "
-					+ ub1 + " && " + tab1 + " != " + tab2 + ")";
+					+ ub1 + " && " + tab1 + " != " + tab2 + ")";*/
+		OCLExpression<Classifier> array1 = callExp.getSource();
+		OCLExpression<Classifier> array2 = callExp.getArgument().get(0);
+		Boolean equals = oper.equals("==");
+		String tab1 = array1.accept(this);
+		String tab2 = array2.accept(this);
+		tab1 = maybePointerProperty(array1, tab1);
+		tab2 = maybePointerProperty(array2, tab2);
+		return tab1 + (equals?" == ":" != ") + tab2;
 	}
 
 	/**
@@ -492,7 +515,7 @@ public class OCLVisitor
 	 * "obj.size_array".
 	 */
 	@SuppressWarnings("unchecked")
-	private String getSizeParamName(OCLExpression<Classifier> array) {
+	protected String getSizeParamName(OCLExpression<Classifier> array) {
 		// Parameter
 		if (array instanceof VariableExp) {
 			Parameter param = (Parameter) ((VariableExp<Classifier, ?>) array)
@@ -593,7 +616,7 @@ public class OCLVisitor
 	 * aggregation
 	 */
 	@SuppressWarnings("unchecked")
-	private String maybePointerProperty(OCLExpression<Classifier> exp,
+	protected String maybePointerProperty(OCLExpression<Classifier> exp,
 			String base) {
 		if (exp instanceof PropertyCallExp) {
 			Property property = ((PropertyCallExp<Classifier, Property>) exp)
@@ -845,6 +868,11 @@ public class OCLVisitor
 		return "\\null";
 	}
 	
+	@Override
+	public String visitCollectionItem(CollectionItem<Classifier> item) {
+		return item.getItem().accept(this);
+	}
+	
 	/**
 	 * Not implemented
 	 */
@@ -956,14 +984,6 @@ public class OCLVisitor
 	public String visitCollectionLiteralExp(
 			CollectionLiteralExp<Classifier> literalExp) {
 		return "CollectionLiteralExp";
-	}
-
-	/**
-	 * Not implemented
-	 */
-	@Override
-	public String visitCollectionItem(CollectionItem<Classifier> item) {
-		return "CollectionItem";
 	}
 
 	/**
