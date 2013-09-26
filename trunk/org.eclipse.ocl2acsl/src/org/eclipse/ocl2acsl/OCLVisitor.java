@@ -447,7 +447,7 @@ public class OCLVisitor
 	 */
 	public String visitEqualNonEqualCall(
 			OperationCallExp<Classifier, Operation> callExp, String oper) {
-		/*OCLExpression<Classifier> array1 = callExp.getSource();
+		OCLExpression<Classifier> array1 = callExp.getSource();
 		OCLExpression<Classifier> array2 = callExp.getArgument().get(0);
 		Boolean equals = oper.equals("==");
 		String size1 = getSizeParamName(array1);
@@ -462,15 +462,7 @@ public class OCLVisitor
 					+ ub1 + " ==>" + tab1 + " == " + tab2 + ")";
 		else
 			return size1 + "!=" + size2 + " || (\\exists int i; 0 <= i <= "
-					+ ub1 + " && " + tab1 + " != " + tab2 + ")";*/
-		OCLExpression<Classifier> array1 = callExp.getSource();
-		OCLExpression<Classifier> array2 = callExp.getArgument().get(0);
-		Boolean equals = oper.equals("==");
-		String tab1 = array1.accept(this);
-		String tab2 = array2.accept(this);
-		tab1 = maybePointerProperty(array1, tab1);
-		tab2 = maybePointerProperty(array2, tab2);
-		return tab1 + (equals?" == ":" != ") + tab2;
+					+ ub1 + " && " + tab1 + " != " + tab2 + ")";
 	}
 
 	/**
