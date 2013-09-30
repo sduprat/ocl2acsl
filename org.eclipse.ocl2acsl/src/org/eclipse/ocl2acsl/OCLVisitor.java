@@ -128,7 +128,7 @@ public class OCLVisitor
 	/*
 	 * Checks if an expression is marked with the Pre label
 	 */
-	private String maybeAtPre(FeatureCallExp<Classifier> mpc, String base) {
+	protected String maybeAtPre(FeatureCallExp<Classifier> mpc, String base) {
 		return mpc.isMarkedPre() ? "\\old(" + base + ")" : base;
 	}
 
