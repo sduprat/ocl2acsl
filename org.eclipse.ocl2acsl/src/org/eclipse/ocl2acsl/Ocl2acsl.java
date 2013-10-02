@@ -66,17 +66,19 @@ public class Ocl2acsl {
 	
 	private static List<CustomOperation> getAllOperations() {
 		List<CustomOperation> result = new LinkedList<CustomOperation>();
-		IConfigurationElement[] extensions = Platform.getExtensionRegistry().getConfigurationElementsFor(Activator.PLUGIN_ID, EXT_ID);
-		for (IConfigurationElement c : extensions){
-			try {
-				CustomOperation op = (CustomOperation) c.createExecutableExtension("instance");
-				acslOperationName.put(op.getName(), c.getAttribute("acslName"));
-				acslOperationNotationType.put(c.getAttribute("acslName"), c.getAttribute("notation_type"));
-				result.add(op);
-			} catch (CoreException e) {
-				e.printStackTrace();
+		if (Platform.isRunning()){
+			IConfigurationElement[] extensions = Platform.getExtensionRegistry().getConfigurationElementsFor(Activator.PLUGIN_ID, EXT_ID);
+			for (IConfigurationElement c : extensions){
+				try {
+					CustomOperation op = (CustomOperation) c.createExecutableExtension("instance");
+					acslOperationName.put(op.getName(), c.getAttribute("acslName"));
+					acslOperationNotationType.put(c.getAttribute("acslName"), c.getAttribute("notation_type"));
+					result.add(op);
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
+				
 			}
-			
 		}
 		return result;
 	}
@@ -97,7 +99,6 @@ public class Ocl2acsl {
 		Operation context = (Operation) cons.getContext() ;
 		String constraint = cons.getSpecification().stringValue();
 
-		
 		helper.setOperationContext(context.getClass_(), context);
 		try {
 			Constraint c_ocl = helper.createPostcondition(constraint);
