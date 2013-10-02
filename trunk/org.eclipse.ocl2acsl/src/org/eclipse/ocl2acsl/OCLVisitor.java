@@ -507,7 +507,7 @@ public class OCLVisitor
 	 * "obj.size_array".
 	 */
 	@SuppressWarnings("unchecked")
-	protected String getSizeParamName(OCLExpression<Classifier> array) {
+	public String getSizeParamName(OCLExpression<Classifier> array) {
 		// Parameter
 		if (array instanceof VariableExp) {
 			Parameter param = (Parameter) ((VariableExp<Classifier, ?>) array)
