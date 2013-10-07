@@ -299,7 +299,7 @@ public class OCLVisitor
 	private int getPriority(String oper) {
 		if (oper.equals("at") || oper.equals("first") || oper.equals("size"))
 			return 110;
-		if (oper.equals("!") || oper.equals("#-") || Ocl2acsl.acslOperationName.values().contains(oper))
+		if (oper.equals("!") || oper.equals("#-"))
 			return 100;
 		if (oper.equals("*") || oper.equals("/") || oper.equals("%"))
 			return 90;
@@ -320,6 +320,8 @@ public class OCLVisitor
 		// The != for collections is translated to a disjunction
 		if (oper.equals("||") || oper.equals("#!="))
 			return 30;
+		if (Ocl2acsl.acslOperationName.values().contains(oper))
+			return 25;
 		if (oper.equals("==>"))
 			return 20;
 		if (oper.equals("if"))
