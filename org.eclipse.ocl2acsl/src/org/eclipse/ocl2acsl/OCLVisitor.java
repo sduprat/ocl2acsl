@@ -52,16 +52,13 @@ import org.eclipse.uml2.uml.CallOperationAction;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Constraint;
 import org.eclipse.uml2.uml.DataType;
-import org.eclipse.uml2.uml.Enumeration;
 import org.eclipse.uml2.uml.EnumerationLiteral;
 import org.eclipse.uml2.uml.Operation;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.ParameterDirectionKind;
-import org.eclipse.uml2.uml.PrimitiveType;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.SendSignalAction;
 import org.eclipse.uml2.uml.State;
-import org.eclipse.uml2.uml.Type;
 
 /**
  * OCLVisitor visits an OCLExpression and generates the corresponding ACSL code.
@@ -189,7 +186,9 @@ public class OCLVisitor
 			if (addPre) res = "\\old(" + res + ")";
 			return res;
 		}
-		if (oper.equals("oclAsType")) return callExp.getSource().accept(this);
+		if (oper.equals("oclAsType")) {
+			return callExp.getSource().accept(this);
+		}
 		if (oper.equals("subSequence")) {
 			String source = callExp.getSource().accept(this);
 			String offset = callExp.getArgument().get(0).accept(this);
@@ -300,7 +299,7 @@ public class OCLVisitor
 	private int getPriority(String oper) {
 		if (oper.equals("at") || oper.equals("first") || oper.equals("size"))
 			return 110;
-		if (oper.equals("!") || oper.equals("#-"))
+		if (oper.equals("!") || oper.equals("#-") || Ocl2acsl.acslOperationName.values().contains(oper))
 			return 100;
 		if (oper.equals("*") || oper.equals("/") || oper.equals("%"))
 			return 90;
@@ -595,12 +594,9 @@ public class OCLVisitor
 	 * Checks if a parameter is a pointer
 	 */
 	private Boolean isPointer(Parameter param) {
-		Type type = param.getType();
-		Boolean isPrimitive = (type instanceof PrimitiveType);
-		Boolean isEnum = (type instanceof Enumeration);
-		return ((param.getDirection()
+		return (param.getDirection()
 				.equals(ParameterDirectionKind.OUT_LITERAL) || param
-				.getDirection().equals(ParameterDirectionKind.INOUT_LITERAL)) || (!isPrimitive && !isEnum));
+				.getDirection().equals(ParameterDirectionKind.INOUT_LITERAL));
 	}
 
 	/*
