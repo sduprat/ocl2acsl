@@ -43,41 +43,46 @@ import org.eclipse.uml2.uml.Property;
  */
 public class Ocl2acsl {
 
-    protected  OCL<?, Classifier, Operation, Property, ?, ?, ?, ?, ?, ?, ?, ?> ocl;
-    protected  UMLEnvironmentFactory envFact;
-    protected  OCLHelper<Classifier, Operation, Property,Constraint> helper;	
-    protected static String EXT_ID = "customOperation" ; 
-    protected static HashMap<String, String> acslOperationName = new HashMap<String, String>() ;
-    protected static HashMap<String, String> acslOperationNotationType = new HashMap<String, String>() ;
-    protected static List<CustomOperation> allOperations = getAllOperations();
-    
-    
+	protected OCL<?, Classifier, Operation, Property, ?, ?, ?, ?, ?, ?, ?, ?> ocl;
+	protected UMLEnvironmentFactory envFact;
+	protected OCLHelper<Classifier, Operation, Property, Constraint> helper;
+	protected static String EXT_ID = "customOperation";
+	protected static HashMap<String, String> acslOperationName = new HashMap<String, String>();
+	protected static HashMap<String, String> acslOperationNotationType = new HashMap<String, String>();
+	protected static List<CustomOperation> allOperations = getAllOperations();
+
 	@SuppressWarnings("unchecked")
 	public Ocl2acsl() {
-		//initialization of the environment
+		// initialization of the environment
 		envFact = new UMLEnvironmentFactory();
-		ocl = OCL.newInstance(envFact );
-		helper = (OCLHelper<Classifier, Operation, Property, Constraint>) ocl.createOCLHelper();
-		for (CustomOperation c : allOperations){
+		ocl = OCL.newInstance(envFact);
+		helper = (OCLHelper<Classifier, Operation, Property, Constraint>) ocl
+				.createOCLHelper();
+		for (CustomOperation c : allOperations) {
 			addOperationToEnvironment(c);
 		}
-		//definition of new acsl operation
+		// definition of new acsl operation
 	}
-	
+
 	private static List<CustomOperation> getAllOperations() {
 		List<CustomOperation> result = new LinkedList<CustomOperation>();
-		if (Platform.isRunning()){
-			IConfigurationElement[] extensions = Platform.getExtensionRegistry().getConfigurationElementsFor(Activator.PLUGIN_ID, EXT_ID);
-			for (IConfigurationElement c : extensions){
+		if (Platform.isRunning()) {
+			IConfigurationElement[] extensions = Platform
+					.getExtensionRegistry().getConfigurationElementsFor(
+							Activator.PLUGIN_ID, EXT_ID);
+			for (IConfigurationElement c : extensions) {
 				try {
-					CustomOperation op = (CustomOperation) c.createExecutableExtension("instance");
-					acslOperationName.put(op.getName(), c.getAttribute("acslName"));
-					acslOperationNotationType.put(c.getAttribute("acslName"), c.getAttribute("notation_type"));
+					CustomOperation op = (CustomOperation) c
+							.createExecutableExtension("instance");
+					acslOperationName.put(op.getName(),
+							c.getAttribute("acslName"));
+					acslOperationNotationType.put(c.getAttribute("acslName"),
+							c.getAttribute("notation_type"));
 					result.add(op);
 				} catch (CoreException e) {
 					e.printStackTrace();
 				}
-				
+
 			}
 		}
 		return result;
@@ -96,14 +101,15 @@ public class Ocl2acsl {
 	public String prepost2acsl(Constraint cons) throws OCL2acslParserException {
 
 		String result = "";
-		Operation context = (Operation) cons.getContext() ;
+		Operation context = (Operation) cons.getContext();
 		String constraint = cons.getSpecification().stringValue();
 
 		helper.setOperationContext(context.getClass_(), context);
 		try {
 			Constraint c_ocl = helper.createPostcondition(constraint);
-			if (c_ocl.getSpecification()  instanceof ExpressionInOCL) {
-				ExpressionInOCL expInOCl = (ExpressionInOCL) c_ocl.getSpecification() ;
+			if (c_ocl.getSpecification() instanceof ExpressionInOCL) {
+				ExpressionInOCL expInOCl = (ExpressionInOCL) c_ocl
+						.getSpecification();
 				OCLVisitor visitorVenuDAilleurs = new OCLVisitor();
 				result = expInOCl.accept(visitorVenuDAilleurs);
 			}
@@ -111,8 +117,8 @@ public class Ocl2acsl {
 			e.printStackTrace();
 			throw new OCL2acslParserException(e);
 		}
-		
-		return result ;
+
+		return result;
 	}
 
 	/**
@@ -127,31 +133,37 @@ public class Ocl2acsl {
 	public String inv2acsl(Constraint cons) throws OCL2acslParserException {
 
 		String result = "";
-		Classifier context = (Classifier) cons.getContext() ;
+		Classifier context = (Classifier) cons.getContext();
 		String constraint = cons.getSpecification().stringValue();
 
 		helper.setContext(context);
-		
+
 		try {
 			Constraint c_ocl = helper.createInvariant(constraint);
-			if (c_ocl.getSpecification()  instanceof ExpressionInOCL) {
-				ExpressionInOCL expInOCl = (ExpressionInOCL) c_ocl.getSpecification() ;
+			if (c_ocl.getSpecification() instanceof ExpressionInOCL) {
+				ExpressionInOCL expInOCl = (ExpressionInOCL) c_ocl
+						.getSpecification();
 				OCLVisitor visitorVenuDAilleurs = new OCLVisitor();
 				result = expInOCl.accept(visitorVenuDAilleurs);
 			}
 		} catch (ParserException e) {
 			throw new OCL2acslParserException(e);
 		}
-		
-		return result ;
+
+		return result;
 	}
 
-    private  void addOperationToEnvironment(CustomOperation operation) {
-        if(operation != null && operation.getName() != null && !operation.getName().isEmpty()) {           
-        		UMLEnvironment umlEnvironment = (UMLEnvironment) ocl.getEnvironment();
-        		umlEnvironment.defineOperation(operation.getClassifier(), operation.getName(), operation.getType(), operation.getParameters(), org.eclipse.uml2.uml.UMLFactory.eINSTANCE.createConstraint());
-        }
-    }
+	private void addOperationToEnvironment(CustomOperation operation) {
+		if (operation != null && operation.getName() != null
+				&& !operation.getName().isEmpty()) {
+			UMLEnvironment umlEnvironment = (UMLEnvironment) ocl
+					.getEnvironment();
+			umlEnvironment.defineOperation(operation.getClassifier(), operation
+					.getName(), operation.getType(), operation.getParameters(),
+					org.eclipse.uml2.uml.UMLFactory.eINSTANCE
+							.createConstraint());
+		}
+	}
 
 	/**
 	 * Returns a list of ACSL valid clauses corresponding to the pointers

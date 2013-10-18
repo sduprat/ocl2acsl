@@ -93,30 +93,31 @@ public class OCLVisitor
 				String source = sourceExp.accept(this);
 				AggregationKind kind = property.getAggregation();
 				// Composition or attribute
-				if (callExp.getSource().getType() instanceof TypeTypeImpl){
-					return maybeAtPre(callExp,property.getName());
+				if (callExp.getSource().getType() instanceof TypeTypeImpl) {
+					return maybeAtPre(callExp, property.getName());
 				}
 				if (kind == AggregationKind.COMPOSITE_LITERAL
 						|| kind == AggregationKind.NONE_LITERAL)
 					return maybeAtPre(callExp,
-								"(" + source + ")." + property.getName());
+							"(" + source + ")." + property.getName());
 				// Aggregation
 				if (kind == AggregationKind.SHARED_LITERAL) {
 					// Aggregation with multiplicity 1 == pointer
 					if (property.getLower() == property.getUpper()
 							&& property.getLower() == 1)
-						return maybeAtPre(callExp,
-								"*((" + source + ")." + property.getName() + ")");
+						return maybeAtPre(callExp, "*((" + source + ")."
+								+ property.getName() + ")");
 					// Aggregation with multiplicity n..n or 0..* == array of
 					// pointers
-					// For now, we return the name of the array and we only apply
+					// For now, we return the name of the array and we only
+					// apply
 					// the * after indexing the array
 					// See maybePointerProperty
 					else
-						return maybeAtPre(callExp,
-								"(" + source + ")." + property.getName());
+						return maybeAtPre(callExp, "(" + source + ")."
+								+ property.getName());
 				}
-			}		
+			}
 			throw new IllegalArgumentException("Unhandled kind of property"
 					+ property.getName() + property.getAggregation());
 		}
@@ -175,15 +176,19 @@ public class OCLVisitor
 		if (oper.equals("at")) {
 			boolean addPre = false;
 			OCLExpression<Classifier> source = callExp.getSource();
-			if (source instanceof PropertyCallExp && ((PropertyCallExp<Classifier, Property>) source).isMarkedPre()) {
+			if (source instanceof PropertyCallExp
+					&& ((PropertyCallExp<Classifier, Property>) source)
+							.isMarkedPre()) {
 				addPre = true;
-				((PropertyCallExp<Classifier, Property>) source).setMarkedPre(false);
+				((PropertyCallExp<Classifier, Property>) source)
+						.setMarkedPre(false);
 			}
 			String op1 = source.accept(this);
 			String op2 = callExp.getArgument().get(0).accept(this);
 			op1 = maybePointerProperty(source, op1);
 			String res = op1 + "[" + op2 + "]";
-			if (addPre) res = "\\old(" + res + ")";
+			if (addPre)
+				res = "\\old(" + res + ")";
 			return res;
 		}
 		if (oper.equals("oclAsType")) {
@@ -195,40 +200,43 @@ public class OCLVisitor
 			source = maybePointerProperty(callExp.getSource(), source);
 			return source + " + " + offset;
 		}
-		if (isUnaryOperator(callExp)){
+		if (isUnaryOperator(callExp)) {
 			String op1 = callExp.getSource().accept(this);
-			if (needParenthesis(callExp.getSource(), oper)){
+			if (needParenthesis(callExp.getSource(), oper)) {
 				op1 = "(" + op1 + ")";
 			}
-			if (Ocl2acsl.acslOperationNotationType.containsKey(oper)){
-				if (Ocl2acsl.acslOperationNotationType.get(oper).equals("prefix")){
-					return  oper + op1 ;
-				}if (Ocl2acsl.acslOperationNotationType.get(oper).equals("procedural")){
-					return oper + "(" + op1 + ")" ;
+			if (Ocl2acsl.acslOperationNotationType.containsKey(oper)) {
+				if (Ocl2acsl.acslOperationNotationType.get(oper).equals(
+						"prefix")) {
+					return oper + op1;
+				}
+				if (Ocl2acsl.acslOperationNotationType.get(oper).equals(
+						"procedural")) {
+					return oper + "(" + op1 + ")";
 				} else {
-					return "Error for an unary operator Notation type Should be infix or procedural" ;
+					return "Error for an unary operator Notation type Should be infix or procedural";
 				}
 			}
-			if (oper.equals("-") || oper.equals("!")){
-				return  oper + op1 ;
+			if (oper.equals("-") || oper.equals("!")) {
+				return oper + op1;
 			} else {
-				return oper + "(" + op1 + ")" ;
+				return oper + "(" + op1 + ")";
 			}
 		}
-		if (isBinaryOperator(callExp)){
+		if (isBinaryOperator(callExp)) {
 			String op1 = callExp.getSource().accept(this);
-			if (needParenthesis(callExp.getSource(), oper)){
+			if (needParenthesis(callExp.getSource(), oper)) {
 				op1 = "(" + op1 + ")";
 			}
 			String op2 = callExp.getArgument().get(0).accept(this);
-			if (needParenthesis(callExp.getArgument().get(0), oper)){
+			if (needParenthesis(callExp.getArgument().get(0), oper)) {
 				op2 = "(" + op2 + ")";
-			 	}
-			if (isInfix(oper)){
-				return op1 + " " + oper+ " " + op2  ;
-			 	} else {
-			 		return oper + "(" + op1 + ", " + op2 +")" ;
-			 	}
+			}
+			if (isInfix(oper)) {
+				return op1 + " " + oper + " " + op2;
+			} else {
+				return oper + "(" + op1 + ", " + op2 + ")";
+			}
 		}
 		throw new IllegalArgumentException("Operator " + oper
 				+ " not supported");
@@ -258,7 +266,8 @@ public class OCLVisitor
 			return "%";
 		if (oper.equals("round"))
 			return "ceil";
-		if (Ocl2acsl.acslOperationName.containsKey(oper)) return Ocl2acsl.acslOperationName.get(oper);
+		if (Ocl2acsl.acslOperationName.containsKey(oper))
+			return Ocl2acsl.acslOperationName.get(oper);
 		return oper;
 	}
 
@@ -585,7 +594,8 @@ public class OCLVisitor
 			if (isPointer(param))
 				return "*" + v.getName();
 		}
-		if (v.getName().equals("self")) return "*self";
+		if (v.getName().equals("self"))
+			return "*self";
 		if (v.getName().equals("result")) {
 			return "\\result";
 		}
@@ -596,8 +606,7 @@ public class OCLVisitor
 	 * Checks if a parameter is a pointer
 	 */
 	private Boolean isPointer(Parameter param) {
-		return (param.getDirection()
-				.equals(ParameterDirectionKind.OUT_LITERAL) || param
+		return (param.getDirection().equals(ParameterDirectionKind.OUT_LITERAL) || param
 				.getDirection().equals(ParameterDirectionKind.INOUT_LITERAL));
 	}
 
@@ -857,12 +866,12 @@ public class OCLVisitor
 	public String visitNullLiteralExp(NullLiteralExp<Classifier> literalExp) {
 		return "\\null";
 	}
-	
+
 	@Override
 	public String visitCollectionItem(CollectionItem<Classifier> item) {
 		return item.getItem().accept(this);
 	}
-	
+
 	/**
 	 * Not implemented
 	 */
@@ -870,7 +879,7 @@ public class OCLVisitor
 	public String visitEnumLiteralExp(
 			EnumLiteralExp<Classifier, EnumerationLiteral> literalExp) {
 		EnumerationLiteral enumLiteral = literalExp.getReferredEnumLiteral();
-		
+
 		return enumLiteral.getName();
 	}
 
@@ -879,7 +888,6 @@ public class OCLVisitor
 			ExpressionInOCL<Classifier, Parameter> expression) {
 		return expression.getBodyExpression().accept(this);
 	}
-
 
 	/**
 	 * Not implemented
