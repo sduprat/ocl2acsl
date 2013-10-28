@@ -114,7 +114,7 @@ typedef struct DataType2 {
 </code>
 
 == Classes and operations ==
-Classes are also translated into C structs, with the same assumptions as datatypes. For owned operations that are not static, the corresponding C functions must also own a reference "self" to the current object. Let's consider the following class example :
+Classes are translated to C modules, their properties are translated to global variables but with the same assumptions as datatypes. Let's consider the following class example :
 
 <img src="https://svn.codespot.com/a/eclipselabs.org/ocl2acsl/wiki/class.PNG"/>
 
@@ -122,29 +122,25 @@ The corresponding C code is given below :
 
 <code>
 #define CLASS1_PROP1_SIZE 5
-
-typedef struct Class1 {
-    int prop1[CLASS1_PROP1_SIZE];
-} Class1;
-
-void test(Class1* self){}
+int prop1[CLASS1_PROP1_SIZE];
+void test(){}
 </code>
 
-In operations, all parameters of primitive types and that are OUT or INOUT, are transformed into pointers. Parameters of user-defined types are always transformed into pointers.  When a parameter is a collection of constant size, a macro should be included to the C code named OPERATION_PARAM_SIZE. If the collection is of variable size, the operation must also own a paramter named size`_`{name`_`array}.
+In operations, all parameters of primitive types and that are OUT or INOUT, are transformed into pointers. When a parameter is a collection of constant size, a macro should be included to the C code named OPERATION_PARAM_SIZE. If the collection is of variable size, the operation must also own a paramter named size`_`{name`_`array}.
 
 Below examples of static operations translation :
 
 ||<code>op1(in n1:Integer, inout n2:Integer)</code>||<code>void op1(int n1, int* n2);</code>||
-||<code>op2(in obj1:Type1, inout obj2:Type1)</code>||<code>void op2(Type1* obj1, Type1* obj2);</code>||
+||<code>op2(in obj1:Type1, inout obj2:Type1)</code>||<code>void op2(Type1 obj1, Type1* obj2);</code>||
 ||<code>op3(in cstArray:Integer[5])</code>||<code>#define OP3_CSTARRAY_SIZE 5</code><code>void op3(int cstArray[OP3_CSTARRAY_SIZE]);</code>|| 
 ||<code>op4(in array:Integer[*],in size_array:Integer)</code>||<code>void op4(int* array, int size_array);</code>||
 
 = Rules for translation =
 
 || *OCL expression* || *Details* || *Remarks and assumptions* || *OCL Example* || *ACSL translation* ||
-|| PropertyCallExp || Attribute access || See assumptions and example above||<code>obj.id / obj.array -> at(i)</code> ||<code>(*obj).id / (*obj).array[i]</code>||
-|| || Composition ||See assumptions and example above ||<code>obj.c1.id / (obj.cN -> at(i)).id / (obj.c -> at(i)).id</code> ||<code>(*obj).c1.id / (*obj).cN`[`i].id / (*obj).c`[`i].id</code>||
-|| || Aggregation || See assumptions and example above ||<code>obj.a1.id / (obj.aN -> at(i)).id / (obj.a -> at(i)).id</code>  ||<code>(*(*obj).a1).id / (*(*obj).aN[i]).id / (*(*obj).a[i]).id</code> ||
+|| PropertyCallExp || Attribute access || See assumptions and example above||<code>obj.id / obj.array -> at(i)</code> ||<code>obj.id / obj.array[i]</code>||
+|| || Composition ||See assumptions and example above ||<code>obj.c1.id / (obj.cN -> at(i)).id / (obj.c -> at(i)).id</code> ||<code>obj.c1.id / obj.cN`[`i].id / obj.c`[`i].id</code>||
+|| || Aggregation || See assumptions and example above ||<code>obj.a1.id / (obj.aN -> at(i)).id / (obj.a -> at(i)).id</code>  ||<code>(*obj.a1).id / (*obj.aN[i]).id / (*obj.a[i]).id</code> ||
 || || PRE label	|| ||<code>x@pre </code> ||<code>\old(x)</code> ||
 || OperationCallExp || or / xor/ and/ not/ implies || On booleans ||  ||<code>`|``|` / ^^ / && / ! /  ==></code>||
 || || +/- || On integers/reals || ||<code>+/-</code>||
