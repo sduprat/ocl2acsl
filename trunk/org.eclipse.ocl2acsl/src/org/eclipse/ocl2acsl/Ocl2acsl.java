@@ -245,10 +245,6 @@ public class Ocl2acsl {
 				validClauses.add(clause);
 			}
 		}
-		if (!op.isStatic()) {
-			String clause = "\\valid(self)";
-			validClauses.add(clause);
-		}
 		return validClauses;
 	}
 
