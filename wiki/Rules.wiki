@@ -1,0 +1,114 @@
+#summary Rules and assumptions of translation.
+
+= Assumptions for translation =
+
+C code generated from the UML model must be generated according to the following assumptions. This tool does not provide an implementation of these patterns but strongly depends on them for contract generation.
+
+== Datatypes ==
+
+We assume that datatypes are translated to C structs. A property of type T is translated to a field of type T. A collection property is translated to a pointer field T`*` if it has a variable size, to an array T`[`n`]` otherwise.  If the size is variable, the struct must also own a property of type int named size`_`{name`_`array} indicating the size of the array. If it is constant, it must be defined using a macro named DATATYPE_PROP_SIZE.
+
+Let's consider the following example :
+
+<img src="https://svn.codespot.com/a/eclipselabs.org/ocl2acsl/wiki/datatype.PNG"/>
+
+We assume the C generation is as follows :
+
+<code> 
+#define TYPE1_CSTARRAY_SIZE 5
+typedef struct Type1 {
+  int id;
+  int* array;
+  int size_array;
+  int cstArray[TYPE1_CSTARRAY_SIZE];
+} Type1; 
+</code>
+
+== Associations ==
+We assume that compositions are translated the same way as attributes while aggregations use pointers. An aggregation of type T is translated to a pointer field of type T`*`. If it has a multiplicity of n, it is translated to an array of pointers of size n. Otherwise, if it has a variable size it is translated to a pointer on pointers. We keep the same assumptions for the size of arrays. Let's consider the following associations between two datatypes :
+
+<img src="https://svn.codespot.com/a/eclipselabs.org/ocl2acsl/wiki/assocs.PNG"/>
+
+We assume the corresponding C code is as follows :
+
+<code>
+#define DATATYPE2_CN_SIZE 5
+#define DATATYPE2_AN_SIZE 9
+
+typedef struct DataType1 {
+  int id;
+} DataType1;
+
+typedef struct DataType2 {
+  DataType1 c1;
+  DataType1 cN[DATATYPE2_CN_SIZE];
+  DataType1* c;
+  DataType1* a1;
+  DataType1* aN[DATATYPE2_AN_SIZE];
+  DataType1** a;
+  int size_c;
+  int size_a;
+} DataType2;
+</code>
+
+== Classes and operations ==
+Classes are translated to C modules, their properties are translated to global variables but with the same assumptions as datatypes. Let's consider the following class example :
+
+<img src="https://svn.codespot.com/a/eclipselabs.org/ocl2acsl/wiki/class.PNG"/>
+
+The corresponding C code is given below :
+
+<code>
+#define CLASS1_PROP1_SIZE 5
+int prop1[CLASS1_PROP1_SIZE];
+void test(){}
+</code>
+
+In operations, all parameters of primitive types and that are OUT or INOUT, are transformed into pointers. When a parameter is a collection of constant size, a macro should be included to the C code named OPERATION_PARAM_SIZE. If the collection is of variable size, the operation must also own a paramter named size`_`{name`_`array}.
+
+Below examples of static operations translation :
+
+||<code>op1(in n1:Integer, inout n2:Integer)</code>||<code>void op1(int n1, int* n2);</code>||
+||<code>op2(in obj1:Type1, inout obj2:Type1)</code>||<code>void op2(Type1 obj1, Type1* obj2);</code>||
+||<code>op3(in cstArray:Integer[5])</code>||<code>#define OP3_CSTARRAY_SIZE 5</code><code>void op3(int cstArray[OP3_CSTARRAY_SIZE]);</code>|| 
+||<code>op4(in array:Integer[*],in size_array:Integer)</code>||<code>void op4(int* array, int size_array);</code>||
+
+= Rules for translation =
+
+|| *OCL expression* || *Details* || *Remarks and assumptions* || *OCL Example* || *ACSL translation* ||
+|| PropertyCallExp || Attribute access || See assumptions and example above||<code>obj.id / obj.array -> at(i)</code> ||<code>obj.id / obj.array[i]</code>||
+|| || Composition ||See assumptions and example above ||<code>obj.c1.id / (obj.cN -> at(i)).id / (obj.c -> at(i)).id</code> ||<code>obj.c1.id / obj.cN`[`i].id / obj.c`[`i].id</code>||
+|| || Aggregation || See assumptions and example above ||<code>obj.a1.id / (obj.aN -> at(i)).id / (obj.a -> at(i)).id</code>  ||<code>(*obj.a1).id / (*obj.aN[i]).id / (*obj.a[i]).id</code> ||
+|| || PRE label	|| ||<code>x@pre </code> ||<code>\old(x)</code> ||
+|| OperationCallExp || or / xor/ and/ not/ implies || On booleans ||  ||<code>`|``|` / ^^ / && / ! /  ==></code>||
+|| || +/- || On integers/reals || ||<code>+/-</code>||
+|| || *// || On integers/reals || ||<code>*//</code>||
+|| || < > <= >= || On integers/reals || ||<code>< > <= >=</code>||
+|| || Min/Max || On integers/reals || ||<code>\Min \Max</code>||
+|| || Mod || On integers || ||<code>%</code>||
+|| || abs || On reals || ||<code>Abs</code>||
+|| || first/last || ||<code>a -> First()/Last()</code>||<code>a[0] a[size_a-1]</code>||
+|| || at || ||<code>a -> at(i)</code> ||<code>a[i]</code>||
+|| || Includes || The source of the operator must be one of the following: || ||	
+|| || || 1- An array that is a parameter of the operation ||<code>a -> includes(e)</code>||<code>\exists int i;  0 <= i <= size_a-1 && a[i]=e</code>||
+|| || || 2- A property that is an array ||<code>obj.prop -> includes(e)</code>||<code>\exists int i;  0 <= i <= obj.size_prop-1 && obj.prop[i]=e</code>||
+|| || Excludes || Idem (a is either a parameter or a property)||<code>a -> excludes(e)</code> ||<code>\forall int i;  0 <= i <= size_a-1 ==> a[i]!=e</code>||
+|| || <> on collections || Idem (a,b are either parameters or properties)||<code>a <> b</code> ||<code>size_a!=size_b</code><code>`|``|` \exists int i;  0 <= i <= size_a-1 && a[i]!=b[i]</code>||
+|| || "=" on collections || Idem (a,b are either parameters or properties)||<code>a = b</code> ||<code>size_a==size_b</code><code>&& \forall int i;  0 <= i <= size_a-1 ==> a[i]=b[i]</code>||
+|| || IncludesAll|| Idem (a,b either parameters or properties) || <code>a -> includesAll(b)</code>||<code>\forall int i;  0 <= i <= size_b-1</code><code>==> \exists int j;  0 <= j <= size_a-1 && a[j]=b[i]</code>||
+|| || ExcludesAll|| Idem (a,b are either parameters or properties)|| <code>a -> excludesAll(b)</code>||<code>\forall int i;  0 <= i <= size_b-1</code><code>==> \forall int j;  0 <= j <= size_a-1 ==> a[j]!=b[i]</code>||
+|| || isEmpty || Idem (a is either a parameter or a property) ||<code>a -> isEmpty()</code>||<code>size_a = 0</code>||
+|| || notEmpty || Idem (a is either a parameter or a property)||<code>a -> notEmpty()</code>||<code>size_a != 0</code>||
+|| || size || Idem (a is either a parameter or a property) ||<code>a -> size()</code> ||<code>size_a</code>||
+|| IteratorExp || Forall || The source of the operator must be one of the following: || ||	 
+|| || || 1- A sequence of integers n1..n2 that indexes an array in the body of the forAll || <code>Sequence(n1..n2) -> forAll( i | body(a -> at (i))</code> ||<code>\forall int i; n1 <= i <= n2 ==> body(a[i]);</code>||
+|| || || 2- An array that is a parameter of the operation ||<code>a -> forAll(x | body(x))</code>||<code>\forall int i; 0 <= i <= size_a-1 ==> body(a[i]);</code>||
+|| || || 3- A property that is an array ||<code>obj.prop -> forAll(x | body(x))</code> ||<code>\forall int i; 0 <= i <= obj.size_prop-1 ==> body(obj.prop[i]);</code>||	 
+|| || Exists || Idem || Idem with \exists || ||
+|| || One || The source of the operator must be one of the following: || ||	 
+|| || || 1- An array that is a parameter of the operation ||<code>a -> one(x | f(x))</code> ||<code>(\exists int i; 0<=i<=size_a-1 && f(a[i]))</code><code>&& (\forall int j; 0<=j<=size_a-1 && j!=i ==> !f(a[i])</code>||
+|| || || 2- A property that is an array ||<code>obj.prop -> one(x | f(x))</code> ||<code>(\exists int i; 0<=i<=obj.size_prop-1 && f(obj.prop[i]))</code><code>&& (\forall int j; 0<=j<=obj.size_prop-1 && j!=i ==> !f(obj.prop[i])</code> ||
+|| VariableExp || Parameter || Generation of assigns clauses for modifiable parameters and valid clauses <br> for pointers and arrays. ||<code>inout x, in array</code>||<code>assigns(*x),\valid(array+(0..size_array))</code>||
+|| || Result || ||<code>result</code> ||<code>\result</code>|| 
+|| IfExp || || ||<code>if condition then x else y endif</code>||<code>condition?x:y</code>||
+|| LetExp || || ||<code>let x: Type = exp in body</code>||<code>\let id=exp;body;</code>||
