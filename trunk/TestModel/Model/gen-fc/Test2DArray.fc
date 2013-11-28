@@ -1,7 +1,6 @@
 module Test2DArray :
 	function test :
 	contract :
-/*@	requires \valid(self);
-	assigns *self;
+/*@	assigns *self;
 	ensures test_post : \forall int it_x; (0 <= it_x <= ARRAY2D_ARRAY_SIZE-1) ==> \let x=(array2d).array[it_x];(\forall int it_y; (0 <= it_y <= ARRAY1D_ARRAY_SIZE-1) ==> \let y=(x).array[it_y];(y == 0)) ;
 */
