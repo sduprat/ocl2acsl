@@ -1,0 +1,10 @@
+module MyObject :
+	function test :
+	contract :
+/*@	requires \valid(self);
+	requires Inv2 : \forall int it_x; (0 <= it_x <= MYOBJECT_MYTAB_SIZE-1) ==> \let x=myTab[it_x];(x == 0) ;
+	requires Inv1 : id == 0 ;
+	assigns *self;
+	ensures Inv2 : \forall int it_x; (0 <= it_x <= MYOBJECT_MYTAB_SIZE-1) ==> \let x=myTab[it_x];(x == 0) ;
+	ensures Inv1 : id == 0 ;
+*/
