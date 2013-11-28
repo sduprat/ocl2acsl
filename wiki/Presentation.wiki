@@ -1,6 +1,4 @@
 #summary Presentation of the plugin.
 
-= Presentation =
-
 OCL2ACSL translates OCL constraints expressed for UML operations into ACSL contracts that are meant to annotate C functions implementing these operations.
 The entry point of the generator is the org.eclipse.ocl2acsl.Ocl2acsl class. It provides methods that parse OCL constraints and produce an Abstract Syntax Tree. The org.eclipse.ocl2acsl.OCLVisitor class provides a visitor that navigates into the tree and translates the OCL nodes.
