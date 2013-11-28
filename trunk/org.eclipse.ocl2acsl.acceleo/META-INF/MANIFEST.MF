@@ -22,5 +22,6 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
-Export-Package: org.eclipse.ocl2acsl.acceleo.common
+Export-Package: org.eclipse.ocl2acsl.acceleo,
+ org.eclipse.ocl2acsl.acceleo.common
 
