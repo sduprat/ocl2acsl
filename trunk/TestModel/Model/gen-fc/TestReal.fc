@@ -12,11 +12,11 @@ module TestReal :
 	function max :
 	contract :
 /*@	assigns \nothing; 
-	ensures max_post : \result == \max(a, b) && \result >= a && \result >= b ;
+	ensures max_post : \result == max(a, b) && \result >= a && \result >= b ;
 */
 	function zero :
 	contract :
 /*@	requires \valid(a);
 	assigns *a;
-	ensures zero_post : \abs(*a) == 0 ;
+	ensures zero_post : abs(*a) == 0 ;
 */

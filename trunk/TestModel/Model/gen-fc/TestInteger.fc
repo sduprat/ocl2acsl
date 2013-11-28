@@ -13,7 +13,7 @@ module TestInteger :
 	function max :
 	contract :
 /*@	assigns \nothing; 
-	ensures max_post : \result == \max(a, b) ;
+	ensures max_post : \result == max(a, b) ;
 */
 	function zero :
 	contract :
