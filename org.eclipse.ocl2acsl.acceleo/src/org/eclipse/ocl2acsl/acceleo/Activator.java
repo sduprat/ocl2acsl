@@ -8,7 +8,7 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package OCL2ACSL;
+package org.eclipse.ocl2acsl.acceleo;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Acceleo OCL2ACSL Module Runtime Plug-in
 Bundle-SymbolicName: org.eclipse.ocl2acsl.acceleo
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: OCL2ACSL.Activator
+Bundle-Activator: org.eclipse.ocl2acsl.acceleo.Activator
 Bundle-Vendor: Eclipse Modeling Project
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.uml2.uml,
@@ -22,5 +22,5 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
-Export-Package: OCL2ACSL.common
+Export-Package: org.eclipse.ocl2acsl.acceleo.common
 

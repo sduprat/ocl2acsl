@@ -1,4 +1,4 @@
-package OCL2ACSL;
+package org.eclipse.ocl2acsl.acceleo;
 
 import java.util.ArrayList;
 
