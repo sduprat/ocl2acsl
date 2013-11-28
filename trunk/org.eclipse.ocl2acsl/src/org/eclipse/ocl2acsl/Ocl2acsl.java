@@ -29,6 +29,7 @@ import org.eclipse.ocl.uml.UMLEnvironmentFactory;
 import org.eclipse.ocl2acsl.additionalOperations.CustomOperation;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Constraint;
+import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Operation;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.PrimitiveType;
@@ -50,6 +51,7 @@ public class Ocl2acsl {
 	protected static HashMap<String, String> acslOperationName = new HashMap<String, String>();
 	protected static HashMap<String, String> acslOperationNotationType = new HashMap<String, String>();
 	protected static List<CustomOperation> allOperations = getAllOperations();
+	private static boolean objectMode; // False : Normal mode True : Uml2ec mode (self object)
 
 	@SuppressWarnings("unchecked")
 	public Ocl2acsl() {
@@ -58,12 +60,18 @@ public class Ocl2acsl {
 		ocl = OCL.newInstance(envFact);
 		helper = (OCLHelper<Classifier, Operation, Property, Constraint>) ocl
 				.createOCLHelper();
+		// definition of new acsl operation
 		for (CustomOperation c : allOperations) {
 			addOperationToEnvironment(c);
 		}
-		// definition of new acsl operation
+		objectMode = false;
 	}
-
+	
+	public Ocl2acsl(boolean mode){
+		this();
+		objectMode = mode;
+	}
+	
 	private static List<CustomOperation> getAllOperations() {
 		List<CustomOperation> result = new LinkedList<CustomOperation>();
 		if (Platform.isRunning()) {
@@ -111,6 +119,31 @@ public class Ocl2acsl {
 				ExpressionInOCL expInOCl = (ExpressionInOCL) c_ocl
 						.getSpecification();
 				OCLVisitor visitorVenuDAilleurs = new OCLVisitor();
+				if (objectMode) visitorVenuDAilleurs.setObjectMode();
+				result = expInOCl.accept(visitorVenuDAilleurs);
+			}
+		} catch (ParserException e) {
+			e.printStackTrace();
+			throw new OCL2acslParserException(e);
+		}
+
+		return result;
+	}
+	
+	public String prepost2acsl(Constraint cons, Class contextClass) throws OCL2acslParserException {
+
+		String result = "";
+		Operation context = (Operation) cons.getContext();
+		String constraint = cons.getSpecification().stringValue();
+
+		helper.setOperationContext(contextClass, context);
+		try {
+			Constraint c_ocl = helper.createPostcondition(constraint);
+			if (c_ocl.getSpecification() instanceof ExpressionInOCL) {
+				ExpressionInOCL expInOCl = (ExpressionInOCL) c_ocl
+						.getSpecification();
+				OCLVisitor visitorVenuDAilleurs = new OCLVisitor();
+				if (objectMode) visitorVenuDAilleurs.setObjectMode();
 				result = expInOCl.accept(visitorVenuDAilleurs);
 			}
 		} catch (ParserException e) {
@@ -144,6 +177,30 @@ public class Ocl2acsl {
 				ExpressionInOCL expInOCl = (ExpressionInOCL) c_ocl
 						.getSpecification();
 				OCLVisitor visitorVenuDAilleurs = new OCLVisitor();
+				if (objectMode) visitorVenuDAilleurs.setObjectMode();
+				result = expInOCl.accept(visitorVenuDAilleurs);
+			}
+		} catch (ParserException e) {
+			throw new OCL2acslParserException(e);
+		}
+
+		return result;
+	}
+	
+	public String inv2acsl(Constraint cons, Class contextClass) throws OCL2acslParserException {
+
+		String result = "";
+		String constraint = cons.getSpecification().stringValue();
+
+		helper.setContext(contextClass);
+
+		try {
+			Constraint c_ocl = helper.createInvariant(constraint);
+			if (c_ocl.getSpecification() instanceof ExpressionInOCL) {
+				ExpressionInOCL expInOCl = (ExpressionInOCL) c_ocl
+						.getSpecification();
+				OCLVisitor visitorVenuDAilleurs = new OCLVisitor();
+				if (objectMode) visitorVenuDAilleurs.setObjectMode();
 				result = expInOCl.accept(visitorVenuDAilleurs);
 			}
 		} catch (ParserException e) {

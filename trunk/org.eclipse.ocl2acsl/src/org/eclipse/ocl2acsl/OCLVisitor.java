@@ -49,6 +49,7 @@ import org.eclipse.ocl.utilities.AbstractVisitor;
 import org.eclipse.ocl.utilities.ExpressionInOCL;
 import org.eclipse.uml2.uml.AggregationKind;
 import org.eclipse.uml2.uml.CallOperationAction;
+import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Constraint;
 import org.eclipse.uml2.uml.DataType;
@@ -70,6 +71,17 @@ public class OCLVisitor
 		extends
 		AbstractVisitor<String, Classifier, Operation, Property, EnumerationLiteral, Parameter, State, CallOperationAction, SendSignalAction, Constraint> {
 
+	private boolean objectMode; // False : Normal mode True : Uml2ec mode (self object)
+	
+	public OCLVisitor(){
+		super();
+		objectMode = false;
+	}
+	
+	public void setObjectMode(){
+		objectMode = true;
+	}
+	
 	/**
 	 * Visits a {@link PropertyCallExp}.
 	 * 
@@ -86,8 +98,16 @@ public class OCLVisitor
 			return maybeAtPre(callExp, property.getName());
 		} else {
 			if (sourceExp.toString().equals("self")) {
-				// Access to module property => Global Variable
-				return maybeAtPre(callExp, property.getName());
+				// Access to module property 
+				if (objectMode) {
+					String propName = property.getName();
+					String name = lowerFirst(propName);
+					if (property.isStatic()) return maybeAtPre(callExp, property.getClass_().getName() + "_" + name);
+					else {
+						return maybeAtPre(callExp, generateAccessInheritedAttribute(property, (Class)sourceExp.getType()));
+					}
+				}
+				else return maybeAtPre(callExp, property.getName());
 			} else {
 				// Access to property of parameter
 				String source = sourceExp.accept(this);
@@ -121,6 +141,30 @@ public class OCLVisitor
 			throw new IllegalArgumentException("Unhandled kind of property"
 					+ property.getName() + property.getAggregation());
 		}
+	}
+	
+	private String lowerFirst(String str){
+		return str.substring(0, 1).toLowerCase() + str.substring(1);
+	}
+	
+	/*
+	 * Generates access to inherited attribute
+	 */
+	private String generateAccessInheritedAttribute(Property p, Class current){
+		StringBuffer res = new StringBuffer("self->");
+		Class owner = p.getClass_();
+		while(!current.equals(owner)){
+			for (Classifier gen : current.getGenerals()){
+				Class genClass = (Class) gen;
+				if (gen.conformsTo(owner)) {
+					res.append(lowerFirst(genClass.getName())+".");
+					current = genClass;
+					break;
+				}
+			}
+		}
+		res.append(lowerFirst(p.getName()));
+		return res.toString();
 	}
 
 	/*
