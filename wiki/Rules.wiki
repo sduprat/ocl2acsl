@@ -111,4 +111,4 @@ Below examples of static operations translation :
 || VariableExp || Parameter || Generation of assigns clauses for modifiable parameters and valid clauses <br> for pointers and arrays. ||<code>inout x, in array</code>||<code>assigns(*x),\valid(array+(0..size_array))</code>||
 || || Result || ||<code>result</code> ||<code>\result</code>|| 
 || IfExp || || ||<code>if condition then x else y endif</code>||<code>condition?x:y</code>||
-|| LetExp || || ||<code>let x: Type = exp in body</code>||<code>\let id=exp;body;</code>||
+|| LetExp || || ||<code>let x: Type = exp in body</code>||<code>\let id=exp;body;</code>|| 
