@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-
-   <feature url="features/org.eclipse.ocl2acsl.feature_1.0.0.201311281354.jar" id="org.eclipse.ocl2acsl.feature" version="1.0.0.201311281354">
+   <feature url="features/org.eclipse.ocl2acsl.feature_1.0.0.201312121139.jar" id="org.eclipse.ocl2acsl.feature" version="1.0.0.201312121139">
       <category name="ocl2acsl_feature"/>
    </feature>
    <category-def name="ocl2acsl_feature" label="Ocl2Acsl plug-in"/>
