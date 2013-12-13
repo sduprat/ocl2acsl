@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Acceleo OCL2ACSL Module Runtime Plug-in
-Bundle-SymbolicName: org.eclipse.ocl2acsl.acceleo
+Bundle-SymbolicName: org.eclipse.ocl2acsl.acceleo;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.ocl2acsl.acceleo.Activator
 Bundle-Vendor: Eclipse Modeling Project
